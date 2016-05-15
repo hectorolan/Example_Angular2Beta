@@ -1,7 +1,10 @@
+//Library
 import {Component, Input, OnInit} from '@angular/core';
 import {RouteParams} from '@angular/router-deprecated';
-import {ControllerPlaceSchedule} from '../../controller/place/ControllerPlaceSchedule';
+//Model
 import {Place} from '../../model/place';
+//Controller
+import {ControllerPlaceSchedule} from '../../controller/place/ControllerPlaceSchedule';
 
 @Component({
     selector: 'controller-placedetail',

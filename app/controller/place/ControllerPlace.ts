@@ -1,9 +1,13 @@
+//Library
 import {Component, OnInit} from '@angular/core';
 import {Router, RouteParams} from '@angular/router-deprecated';
+//Model
+import {Place} from '../../model/Place';
+//Controller
 import {ControllerPlaceDetail} from '../../controller/place/ControllerPlaceDetail';
 import {ControllerPlaceMenu} from '../../controller/place/ControllerPlaceMenu';
+//Service
 import {ServicePlace} from '../../service/serviceplace';
-import {Place} from '../../model/Place';
 
 @Component({
     selector: 'controller-place',

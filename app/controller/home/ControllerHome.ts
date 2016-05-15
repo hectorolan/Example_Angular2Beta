@@ -1,9 +1,12 @@
+//Library
 import {Component, OnInit} from '@angular/core';
 import {Router, RouteParams} from '@angular/router-deprecated';
 import {Observable} from 'rxjs/Observable';
-import "rxjs";
-import {ControllerHomePlaceDetail} from '../../controller/home/ControllerHomePlaceDetail';
+//Model
 import {Place} from '../../model/Place';
+//Controller
+import {ControllerHomePlaceDetail} from '../../controller/home/ControllerHomePlaceDetail';
+//Service
 import {ServicePlace} from '../../service/serviceplace'
 
 @Component({

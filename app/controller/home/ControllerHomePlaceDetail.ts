@@ -1,5 +1,7 @@
+//Library
 import {Component, Input, OnInit} from '@angular/core';
 import {RouteParams} from '@angular/router-deprecated';
+//Model
 import {Place} from '../../model/place';
 
 @Component({

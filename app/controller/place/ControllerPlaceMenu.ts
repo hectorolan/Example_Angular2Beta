@@ -1,9 +1,12 @@
+//Library
 import {Component, OnInit} from '@angular/core';
 import {RouteParams} from '@angular/router-deprecated';
-import {MenuItem} from '../../model/menuItem';
-import {ServiceMenu} from '../../service/servicemenu';
 import {Observable} from 'rxjs/Observable';
 import Rx from 'rxjs/Rx';
+//Model
+import {MenuItem} from '../../model/menuItem';
+//Service
+import {ServiceMenu} from '../../service/servicemenu';
 
 @Component({
     selector: 'controller-placemenu',
@@ -26,9 +29,9 @@ export class ControllerPlaceMenu implements OnInit {
     getMenus(placeId) {
         this._serviceMenu.getMenuItems(placeId)
             .subscribe(
-            menuItems => this.menuItems = menuItems,
-            error => this.error = <string>error,
-            () => this.getCategories(this.menuItems)
+                menuItems => this.menuItems = menuItems,
+                error => this.error = <string>error,
+                () => this.getCategories(this.menuItems)
             );
     }
     getCategories(menus) {

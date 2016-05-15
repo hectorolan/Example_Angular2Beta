@@ -1,9 +1,12 @@
+//Library
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+//Model
+import {Place} from '../../model/place';
+//Controller
 import {ControllerSetMenu} from '../../controller/account/ControllerSetMenu';
 import {ControllerSetSchedule} from '../../controller/account/ControllerSetSchedule';
 import {ControllerSetPlaceInformation} from '../../controller/account/ControllerSetPlaceInformation';
-import {Place} from '../../model/place';
 
 @Component({
     selector: 'controller-manageuser',

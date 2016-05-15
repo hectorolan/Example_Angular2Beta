@@ -1,5 +1,7 @@
+//Library
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
+//Model
 import {Place} from '../../model/Place';
 import {Schedule} from '../../model/Schedule';
 

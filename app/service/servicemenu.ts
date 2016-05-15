@@ -3,7 +3,6 @@ import {Http, Response, Headers, RequestOptions} from '@angular/http';
 import {MenuItem} from '../../app/model/menuitem';
 import {Log} from '../../app/service/log';
 import {Observable} from 'rxjs/Observable';
-//import "rxjs";
 
 @Injectable()
 export class ServiceMenu {
