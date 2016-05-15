@@ -1,6 +1,9 @@
+//Library
 import {Component, OnInit} from '@angular/core';
 import {RouteParams} from '@angular/router-deprecated';
+//Model
 import {Schedule} from '../../model/schedule';
+//Service
 import {ServiceSchedule} from '../../service/serviceschedule';
 
 @Component({
@@ -12,6 +15,7 @@ import {ServiceSchedule} from '../../service/serviceschedule';
 })
 export class ControllerPlaceSchedule implements OnInit{
     schedule: Schedule;
+    error: string;
     days: string[];
     
     constructor(
@@ -19,30 +23,16 @@ export class ControllerPlaceSchedule implements OnInit{
         private _serviceSchedule: ServiceSchedule){
     }
     ngOnInit(){
-        let id: number = +this._routeParams.get('id');
-        this.getSchedule(id);
+        let placeId: number = +this._routeParams.get('id');
+        this.getSchedule(placeId);
         this.days = this.getDays();
     }
-    getSchedule(id){
-        
-        let schedule = new Schedule();
-        schedule.id = 1;
-        schedule.sundayOpen = "-";
-        schedule.sundayClose = "-";
-        schedule.mondayOpen = "5:00pm";
-        schedule.mondayClose = "11:00pm";
-        schedule.tuesdayOpen = "4:00pm";
-        schedule.tuesdayClose = "11:00pm";
-        schedule.wednesdayOpen = "11:00am";
-        schedule.wednesdayClose = "11:00pm";
-        schedule.thursdayOpen = "8:00am";
-        schedule.thursdayClose = "11:00pm";
-        schedule.fridayOpen = "8:00am";
-        schedule.fridayClose = "11:00pm";
-        schedule.saturdayOpen = "8:00am";
-        schedule.saturdayClose = "11:00pm";
-        schedule.placeId = id;
-        return schedule;
+    getSchedule(placeId){
+        this._serviceSchedule.getSchedule(placeId)
+        .subscribe(
+            schedule => this.schedule = schedule,
+            error => this.error = <any> error
+        );
     }
     getDays(){
         let days: string[] = [

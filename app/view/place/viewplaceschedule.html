@@ -1,4 +1,4 @@
-<div class="container-fluid place-schedule">
+<div class="container-fluid place-schedule" *ngIf="schedule">
     <div class="row">
         <div class="col-xs-12">
             {{days[0]}} {{schedule.sundayOpen}}-{{schedule.sundayClose}}</div>
