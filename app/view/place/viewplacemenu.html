@@ -1,0 +1,19 @@
+<div class="row menu-section" *ngFor="let category of categories" [ngStyle]="setStyleBackground(category)">
+    <div class="col-xs-11 col-xs-offset-1 col-md-8 col-md-offset-2">
+        <h5>{{category}}</h5>
+    </div>
+    <div class="col-xs-12">
+        <div *ngFor="let item of menuItems">
+            <div  *ngIf="item.category == category" >
+            <div class="col-xs-9 col-sm-5 col-sm-offset-2">
+                <span class="menu-name">{{item.name}}<span class="menu-calories"> {{item.calories}}cal</span></span>
+                <cite class="menu-remarks">{{item.remark}}</cite>
+                <span class="menu-ingredients">-
+                    <span *ngFor="let ingredient of item.ingredients">{{ingredient}} </span>
+                </span>
+            </div>
+            <div class="col-xs-3 menu-price">${{item.price}}</div>
+            </div>
+        </div>
+    </div>
+</div>

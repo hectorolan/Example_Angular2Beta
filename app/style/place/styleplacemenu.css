@@ -1,0 +1,34 @@
+ .menu-section {
+  align-items: center;
+  padding: 2rem 0;
+  /*background: #FA555F;*/
+}
+
+.menu-category {
+  margin-bottom: -0.5rem;
+}
+
+.menu-name {
+  font-size: 1rem;
+}
+
+.menu-calories{
+  font-size: .5rem;
+  font-style:  oblique;
+}
+
+.menu-remarks {
+  font-size: .8rem;
+  color: #555;
+  display: block;
+}
+
+.menu-price {
+  padding-top: .225rem;
+  font-size: .8rem;
+  text-align: right;
+}
+
+.menu-ingredients {
+  font-size: .6rem;
+}

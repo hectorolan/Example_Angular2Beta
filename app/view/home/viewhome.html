@@ -1,0 +1,9 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="container-fluid home-row" *ngFor="let place of places" [ngStyle]="setStyleBackground()">
+            <div class="col-xs-12 col-md-8 col-md-offset-2 home-place" (click)="toPlace(place)">
+                <controller-homeplacedetail [place]="place"></controller-homeplacedetail>
+            </div>
+        </div>
+    </div>
+</div>

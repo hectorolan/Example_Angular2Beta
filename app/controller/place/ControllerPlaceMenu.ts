@@ -1,0 +1,57 @@
+import {Component, OnInit} from '@angular/core';
+import {RouteParams} from '@angular/router-deprecated';
+import {MenuItem} from '../../model/menuItem';
+import {ServiceMenu} from '../../service/servicemenu';
+import {Observable} from 'rxjs/Observable';
+import Rx from 'rxjs/Rx';
+
+@Component({
+    selector: 'controller-placemenu',
+    templateUrl: '../../app/view/place/viewplacemenu.html',
+    styleUrls: ['../../app/style/place/styleplacemenu.css']
+})
+export class ControllerPlaceMenu implements OnInit {
+    menuItems: MenuItem[];
+    categories: string[] = [];
+    error: string;
+
+    constructor(
+        private _routeParams: RouteParams,
+        private _serviceMenu: ServiceMenu) {
+    }
+    ngOnInit() {
+        let placeId = +this._routeParams.get('id');
+        this.getMenus(placeId);
+    }
+    getMenus(placeId) {
+        this._serviceMenu.getMenuItems(placeId)
+            .subscribe(
+            menuItems => this.menuItems = menuItems,
+            error => this.error = <string>error,
+            () => this.getCategories(this.menuItems)
+            );
+    }
+    getCategories(menus) {
+        Rx
+        .Observable
+        .from(this.menuItems)
+        .map(m => m.category)
+        .distinctUntilChanged()
+        .subscribe(category => this.categories.push(category));
+    }
+    /*
+    * Style Background */
+    setStyleBackground(category: string) {
+        let i: number;
+        for (i = 0; i < this.categories.length; i++) {
+            if (this.categories[i] == category) {
+                break;
+            }
+        }
+        let styles = {
+            // CSS property names
+            'background': (i % 2 != 0) ? '#f0f3f5' : '#f3f5f0',  // background
+        }
+        return styles;
+    }
+}

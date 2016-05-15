@@ -1,0 +1,31 @@
+.panel-body {
+  font-size: 1rem;
+  align-items: center;
+  text-align: center;
+}
+.place-name {
+  font-size: 1.6rem;
+  font-style: oblique;
+}
+.place-city {
+  font-size: .8rem;
+}
+.place-category {
+  font-size: .8rem;
+}
+.place-phoneNumber {
+  font-size: .8rem;
+}
+.place-type {
+  font-size: .8rem;
+}
+.place-hours {
+  width: 100%;
+  font-size: 1rem;
+  vertical-align: middle;
+  align-items: center;
+  text-align: center;
+}
+.container-schedule {
+  font-size: .8rem;
+}

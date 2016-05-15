@@ -1,0 +1,14 @@
+# exclude everything
+/*
+
+#include app
+!app
+#exclude compiled files
+app/**/*.js
+app/**/*.map
+
+#include configuration
+!*.json
+!*.html
+!*.config.js
+!*.gitignore

@@ -1,0 +1,15 @@
+#place-header {
+  align-items: center;
+}
+.place-main-detail {
+  border-bottom: 1px solid #DDD;
+  padding: 2rem 0;
+}
+.place-main-image {
+  padding: 1rem 0;
+}
+.place-main-image img {
+  display: block;
+  margin: 0 auto;
+  max-width: 15rem;
+}

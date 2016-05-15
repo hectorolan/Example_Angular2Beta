@@ -1,0 +1,17 @@
+<nav class="navbar navbar-fixed-top navbar-dark bg-inverse" role="navigation">
+    <div class="container-fluid">
+        <div class="row">
+            <a class="navbar-brand" href="#">pam</a>
+            <button class="navbar-toggler hidden-sm-up" type="button" data-toggle="collapse" data-target="#exCollapsingNavbar2">&#9776;</button>
+            <div class="collapse navbar-toggleable-xs" id="exCollapsingNavbar2">
+                <div class="nav navbar-nav">
+                    <div class="nav-item"><a class="nav-link" [routerLink]="['Home']">Home</a></div>
+                    <div class="nav-item"><a href="#" class="nav-link" [routerLink]="['Home']">Place</a></div>
+                    <div class="nav-item"><a class="nav-link" [routerLink]="['ManagePlace']">Manage/Create Place</a></div>
+                    <div class="nav-item"><a class="nav-link" [routerLink]="['ManageUser']">Manage/Create User</a></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>
+<router-outlet></router-outlet>
