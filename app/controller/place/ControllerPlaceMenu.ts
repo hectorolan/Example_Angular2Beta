@@ -6,7 +6,7 @@ import Rx from 'rxjs/Rx';
 //Model
 import {MenuItem} from '../../model/menuItem';
 //Service
-import {ServiceMenu} from '../../service/servicemenu';
+import {ServiceMenuItem} from '../../service/servicemenuitem';
 
 @Component({
     selector: 'controller-placemenu',
@@ -20,7 +20,7 @@ export class ControllerPlaceMenu implements OnInit {
 
     constructor(
         private _routeParams: RouteParams,
-        private _serviceMenu: ServiceMenu) {
+        private _serviceMenu: ServiceMenuItem) {
     }
     ngOnInit() {
         let placeId = +this._routeParams.get('id');

@@ -4,10 +4,10 @@ import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-
 import {ControllerPlace} from '../app/controller/place/ControllerPlace';
 import {ControllerHome} from '../app/controller/home/ControllerHome';
 import {ControllerManagePlace} from '../app/controller/account/ControllerManagePlace';
-import {ControllerSetMenu} from '../app/controller/account/ControllerSetMenu';
+import {ControllerManageMenu} from '../app/controller/account/ControllerManageMenu';
 import {ControllerManageUser} from '../app/controller/account/ControllerManageUser';
 import {ServicePlace} from '../app/service/serviceplace';
-import {ServiceMenu} from '../app/service/servicemenu';
+import {ServiceMenuItem} from '../app/service/servicemenuitem';
 import {ServiceSchedule} from '../app/service/serviceschedule';
 
 @RouteConfig([
@@ -30,7 +30,7 @@ import {ServiceSchedule} from '../app/service/serviceschedule';
     {
         path: '/account/place/menu',
         name: 'SetMenu',
-        component: ControllerSetMenu
+        component: ControllerManageMenu
     },
     {
         path: '/account',
@@ -48,7 +48,7 @@ import {ServiceSchedule} from '../app/service/serviceschedule';
         ROUTER_DIRECTIVES
     ],
     providers: [
-        ServiceMenu,
+        ServiceMenuItem,
         ServicePlace,
         ServiceSchedule,
         HTTP_PROVIDERS,
