@@ -3,18 +3,157 @@
         <div class="col-xs-12 col-md-8 col-md-offset-2">
             <div class="card text-xs-left">
                 <div class="card-header">
-                    {{operation}}
+                    {{title}}
                 </div>
                 <div class="card-block">
-                    <!--<h4 class="card-title">Special title treatment</h4>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Go somewhere</a> -->
                     <div class="menu-container">
                         <label href="#" (click)="gotoMenu()" class="btn btn-primary-outline" role="button">Menu</label>
                     </div>
-                    <form action="">
-                        <controller-setplaceinformation></controller-setplaceinformation>
-                        <controller-setschedule></controller-setschedule>
+                    <form (ngSubmit)="onSubmitSaveChanges()" #manageplace="ngForm">
+                        <h3>Place Information</h3>
+                        <!-- place name -->
+                        <fieldset class="form-group">
+                            <small class="text-muted">Place Name</small>
+                            <input type="text" class="form-control" placeholder="Place Name" 
+                            [(ngModel)]="formPlace.name" ngControl="name" #name="ngForm">
+                        </fieldset>
+                        <!-- address -->
+                        <fieldset class="form-group">
+                            <small class="text-muted">Address</small>
+                            <input type="text" class="form-control" placeholder="Address"
+                            [(ngModel)]="formPlace.city" ngControl="city" #city="ngForm">
+                        </fieldset>
+                        <!-- phone number -->
+                        <fieldset class="form-group">
+                            <small class="text-muted">Phone Number</small>
+                            <input type="tel" class="form-control" placeholder="Phone Number"
+                            [(ngModel)]="formPlace.phoneNumber" ngControl="phoneNumber" #phoneNumber="ngForm">
+                        </fieldset>
+                        <!-- category -->
+                        <fieldset class="form-group col-xs-12 col-sm-5 category-type">
+                            <small class="text-muted ">Category</small>
+                            <select class="form-control c-select"
+                            [(ngModel)]="formPlace.category" ngControl="category" #category="ngForm">
+                                    <option>- Select -</option>
+                                    <option>Mexican</option>
+                                    <option>Puerto Rican</option>
+                                    <option>American</option>
+                                    <option>Italian</option>
+                                    <option>Chinise</option>
+                                    <option>Perubian</option>
+                                    <option>Other</option>
+                                </select>
+                        </fieldset>
+                        <div class="col-xs-0 col-sm-1 "></div>
+                        <!-- type -->
+                        <fieldset class="form-group col-xs-12 col-sm-5 category-type">
+                            <small class="text-muted">Type</small>
+                            <select class="form-control c-select"
+                            [(ngModel)]="formPlace.type" ngControl="type" #type="ngForm">
+                                    <option>- Select -</option>
+                                    <option>Restaurant</option>
+                                    <option>Bar</option>
+                                    <option>Food Truck</option>
+                                    <option>Lounge</option>
+                                    <option>Other</option>
+                                </select>
+                        </fieldset>
+                        <!-- schedule -->
+                        <h3>Open Hours</h3>
+                        <!-- sunday -->
+                        <fieldset class="form-group">
+                            <small class="text-muted text-header">Sunday</small>
+                            <div class="input-group input-group-sm col-xs-12 col-sm-4">
+                                <span class="input-group-addon">From</span>
+                                <input type="time" class="form-control"
+                                [(ngModel)]="formPlace.sundayOpen" ngControl="sundayOpen" #sundayOpen="ngForm">
+                            </div>
+                            <div class="col-xs-0 col-sm-1"></div>
+                            <div class="input-group input-group-sm col-xs-12 col-sm-4">
+                                <span class="input-group-addon">To</span>
+                                <input type="time" class="form-control"
+                                [(ngModel)]="formPlace.sundayClose" ngControl="sundayClose" #sundayClose="ngForm">
+                            </div>
+                        </fieldset>
+                        <!-- monday -->
+                        <fieldset class="form-group">
+                            <small class="text-muted text-header">Monday</small>
+                            <div class="input-group input-group-sm col-xs-12 col-sm-4">
+                                <span class="input-group-addon">From</span>
+                                <input type="time" class="form-control"
+                                [(ngModel)]="formPlace.mondayOpen" ngControl="mondayOpen" #mondayOpen="ngForm">
+                            </div>
+                            <div class="col-xs-0 col-sm-1"></div>
+                            <div class="input-group input-group-sm col-xs-12 col-sm-4">
+                                <span class="input-group-addon">To</span>
+                                <input type="time" class="form-control"
+                                [(ngModel)]="formPlace.mondayClose" ngControl="mondayClose" #mondayClose="ngForm">
+                            </div>
+                        </fieldset>
+                        <!-- tusday -->
+                        <fieldset class="form-group">
+                            <small class="text-muted text-header">Tuesday</small>
+                            <div class="input-group input-group-sm col-xs-12 col-sm-4">
+                                <span class="input-group-addon">From</span>
+                                <input type="time" class="form-control"
+                                [(ngModel)]="formPlace.tuesdayOpen" ngControl="tuesdayOpen" #tuesdayOpen="ngForm">
+                            </div>
+                            <div class="col-xs-0 col-sm-1"></div>
+                            <div class="input-group input-group-sm col-xs-12 col-sm-4">
+                                <span class="input-group-addon">To</span>
+                                <input type="time" class="form-control"
+                                [(ngModel)]="formPlace.tuesdayClose" ngControl="tuesdayClose" #tuesdayClose="ngForm">
+                            </div>
+                        </fieldset>
+                        <!-- thrusday -->
+                        <fieldset class="form-group">
+                            <small class="text-muted text-header">Thursday</small>
+                            <div class="input-group input-group-sm col-xs-12 col-sm-4">
+                                <span class="input-group-addon">From</span>
+                                <input type="time" class="form-control"
+                                [(ngModel)]="formPlace.thursdayOpen" ngControl="thursdayOpen" #thursdayOpen="ngForm">
+                            </div>
+                            <div class="col-xs-0 col-sm-1"></div>
+                            <div class="input-group input-group-sm col-xs-12 col-sm-4">
+                                <span class="input-group-addon">To</span>
+                                <input type="time" class="form-control"
+                                [(ngModel)]="formPlace.thursdayClose" ngControl="thursdayClose" #thursdayClose="ngForm">
+                            </div>
+                        </fieldset>
+                        <!-- friday -->
+                        <fieldset class="form-group">
+                            <small class="text-muted text-header">Friday</small>
+                            <div class="input-group input-group-sm col-xs-12 col-sm-4">
+                                <span class="input-group-addon">From</span>
+                                <input type="time" class="form-control"
+                                [(ngModel)]="formPlace.fridayOpen" ngControl="fridayOpen" #fridayOpen="ngForm">
+                            </div>
+                            <div class="col-xs-0 col-sm-1"></div>
+                            <div class="input-group input-group-sm col-xs-12 col-sm-4">
+                                <span class="input-group-addon">To</span>
+                                <input type="time" class="form-control"
+                                [(ngModel)]="formPlace.fridayClose" ngControl="fridayClose" #fridayClose="ngForm">
+                            </div>
+                        </fieldset>
+                        <!-- saturday -->
+                        <fieldset class="form-group">
+                            <small class="text-muted text-header">Saturday</small>
+                            <div class="input-group input-group-sm col-xs-12 col-sm-4">
+                                <span class="input-group-addon">From</span>
+                                <input type="time" class="form-control"
+                                [(ngModel)]="formPlace.saturdayOpen" ngControl="saturdayOpen" #saturdayOpen="ngForm">
+                            </div>
+                            <div class="col-xs-0 col-sm-1"></div>
+                            <div class="input-group input-group-sm col-xs-12 col-sm-4">
+                                <span class="input-group-addon">To</span>
+                                <input type="time" class="form-control"
+                                [(ngModel)]="formPlace.saturdayClose" ngControl="saturdayClose" #saturdayClose="ngForm">
+                            </div>
+                        </fieldset>
+                        <!-- submit -->
+                        <fieldset class="form-group menu-container">
+                            <button type="submit" class="btn btn-primary-outline" role="button">Save Changes</button>
+                        </fieldset>
                     </form>
                 </div>
                 <div class="card-footer text-muted">
