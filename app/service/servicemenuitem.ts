@@ -5,7 +5,7 @@ import {Log} from '../../app/service/log';
 import {Observable} from 'rxjs/Observable';
 
 @Injectable()
-export class ServiceMenu {
+export class ServiceMenuItem {
     path: string = "http://localhost:8080/restful-pam/webapi/place/";
 
     constructor(
