@@ -6,8 +6,10 @@
 #exclude compiled files
 app/**/*.js
 app/**/*.map
+**/*.DS_Store
 
 #include configuration
+!gulpfile.js
 !*.json
 !*.html
 !*.config.js
