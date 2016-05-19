@@ -27,7 +27,7 @@ export class ControllerPlaceSchedule implements OnInit{
         this.getSchedule(placeId);
         this.days = this.getDays();
     }
-    getSchedule(placeId){
+    getSchedule(placeId: number){
         this._serviceSchedule.getSchedule(placeId)
         .subscribe(
             schedule => this.schedule = schedule,

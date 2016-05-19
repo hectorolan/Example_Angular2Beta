@@ -14,7 +14,7 @@ import {ServiceMenuItem} from '../../service/servicemenuitem';
     styleUrls: ['../../app/style/place/styleplacemenu.css']
 })
 export class ControllerPlaceMenu implements OnInit {
-    menuItems: MenuItem[];
+    menuItems: MenuItem[] = [];
     categories: string[] = [];
     error: string;
 
@@ -26,7 +26,7 @@ export class ControllerPlaceMenu implements OnInit {
         let placeId = +this._routeParams.get('id');
         this.getMenus(placeId);
     }
-    getMenus(placeId) {
+    getMenus(placeId: number) {
         this._serviceMenu.getMenuItems(placeId)
             .subscribe(
                 menuItems => this.menuItems = menuItems,
@@ -34,11 +34,11 @@ export class ControllerPlaceMenu implements OnInit {
                 () => this.getCategories(this.menuItems)
             );
     }
-    getCategories(menus) {
+    getCategories(menus: MenuItem[]) {
         Rx
         .Observable
-        .from(this.menuItems)
-        .map(m => m.category)
+        .from(menus)
+        .map((m:MenuItem) => m.category)
         .distinctUntilChanged()
         .subscribe(category => this.categories.push(category));
     }
