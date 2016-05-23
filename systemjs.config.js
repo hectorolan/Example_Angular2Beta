@@ -5,10 +5,10 @@
 
   // System loader - look for things
   var map = {
-    'app':                        'dist/app',
-    'rxjs':                       'node_modules/rxjs',
-    'angular2-in-memory-web-api': 'node_modules/angular2-in-memory-web-api',
-    '@angular':                   'node_modules/@angular'
+    'app':                        'app',
+    'rxjs':                       'libs/rxjs',
+    'angular2-in-memory-web-api': 'libs/angular2-in-memory-web-api',
+    '@angular':                   'libs/@angular'
   };
 
   // packages tells the System loader how to load when no filename and/or no extension
