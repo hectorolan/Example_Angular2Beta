@@ -1,5 +1,5 @@
-# olanh-pam-angular
-## What do we use
+### olanh-pam-angular
+## Structure
 This **web application** is builded using **angular 2** as main framework. Managed and organized with node package manager-**npm**, **gulp**; **bootstrap** for the user interface and **lite-server** for testing/developing process. For the code you will mostly find **typescript**, **scss** and **html**.
 
 ## What it does
