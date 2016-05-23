@@ -1,62 +1,87 @@
-var gulp = require('gulp');
-var sourcemaps = require('gulp-sourcemaps');
-var tsc = require('gulp-typescript');
-var del = require('del');
-var concat = require('gulp-concat');
-var tscConfig = require ('./tsconfig.json');
+var gulp        = require('gulp');
+var sourcemaps  = require('gulp-sourcemaps');
+var tsc         = require('gulp-typescript');
+var sass        = require('gulp-sass');
+var concat      = require('gulp-concat');
+var del         = require('del');
+var tscConfig   = require('./tsconfig.json');
+var browserSync = require('browser-sync').create();
 
-// Clean last publish
+gulp.task('start', ['watch']);
+gulp.task('build', ['compile:ts','compile:sass','copy:libs','copy:styles','copy:assets']);
+gulp.task('default', ['build']);
+
+//Delete distribution directory
 gulp.task('clean', function (){
    return del('dist/**/*'); 
 });
-
-gulp.task('install', ['clean'], function (){
-   return gulp
-   .src('app/**/*.ts')
-   //.src(tscConfig.compilerOptions)
+//Watch the files and compile if necesary
+gulp.task('watch', function (){
+   gulp.watch('app/**/*.ts', ['compile:ts']);
+   gulp.watch('app/**/*.scss', ['compile:sass']);
+   gulp.watch(
+       ['app/**/*', 
+        'index.html',
+        'systemjs.config.js',
+        '!app/**/*.ts',
+        '!app/**/*.scss'],
+       ['copy:assets']);
+});
+//Compile typescript
+gulp.task('compile:ts', function (){
+   return gulp.src('app/**/*.ts')
    .pipe(sourcemaps.init())
    .pipe(tsc(tscConfig.compilerOptions))
    .pipe(sourcemaps.write('.'))
    .pipe(gulp.dest('dist/app')); 
 });
-
-gulp.task('copy:libs', ['install'], function() {
-   return gulp.src([
-       'node_modules/es6-shim/es6-shim.min.js',
-       'node_modules/zone.js/dist/zone.js',
-       'node_modules/reflect-metadata/Reflect.js',
-       'node_modules/systemjs/dist/system.src.js',
-       'node_modules/jquery/dist/jquery.js',
-       'node_modules/tether/dist/js/tether.js',
-       'node_modules/bootstrap/dist/js/bootstrap.js'
-   ])
-   .pipe(gulp.dest('dist/app/libs'))
+//Compile sass
+gulp.task('compile:sass', function (){
+    return gulp.src('app/**/*.scss')
+    .pipe(sass())
+    .pipe(gulp.dest('dist/app'))
 });
-
-gulp.task('copy:style', ['copy:libs'], function() {
+//Copy dependencies
+gulp.task('copy:libs', function() {
+   return gulp.src([
+       'es6-shim/es6-shim.min.js',
+       'zone.js/dist/zone.js',
+       'reflect-metadata/Reflect.js',
+       'systemjs/dist/system.src.js',
+       'rxjs/**/*.js',
+       '\@angular/**/*.js',
+       'jquery/dist/jquery.js',
+       'tether/dist/js/tether.js',
+       'bootstrap/dist/js/bootstrap.js'
+   ], {cwd: "node_modules/**"})
+   .pipe(gulp.dest('dist/libs'))
+});
+//Copy dependecies styles
+gulp.task('copy:styles', function() {
    return gulp.src([
        'node_modules/tether/dist/css/tether.css',
        'node_modules/bootstrap/dist/css/bootstrap.css'
    ])
-   .pipe(gulp.dest('dist/app/style'))
+   .pipe(gulp.dest('dist/app/styles'))
 });
-
-gulp.task('copy:assets', ['copy:style'], function(){
+//Copy all the project files except the typescripts
+gulp.task('copy:assets', function(){
     return gulp.src([
         'app/**/*', 
         'index.html',
         'systemjs.config.js',
-        '!app/**/*.ts'],
+        '!app/**/*.ts',
+        '!app/**/*.scss'],
         {base: './'}
     )
     .pipe(gulp.dest('dist'));
 });
 
+
+
+//Not Using
 gulp.task('minify', ['copy:assets'], function(){
     gulp.src(['dist/app/controller/**/*.js'])
     .pipe(concat('all.js'))
     .pipe(gulp.dest('dist/app/libs/'));
 });
-
-gulp.task('build', ['minify']);
-gulp.task('default', ['build']);
