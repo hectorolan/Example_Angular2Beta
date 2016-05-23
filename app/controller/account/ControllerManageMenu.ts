@@ -10,7 +10,7 @@ import {ServiceMenuItem} from '../../service/servicemenuitem';
 @Component({
     selector: 'controller-setmenu',
     templateUrl: '../../app/view/account/viewmanagemenu.html',
-    styleUrls: ['../../app/style/account/stylemanagemenu.css']
+    styleUrls: ['../../app/styles/account/stylemanagemenu.css']
 })
 export class ControllerManageMenu implements OnInit {
     

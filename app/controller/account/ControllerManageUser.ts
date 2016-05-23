@@ -9,7 +9,7 @@ import {ControllerManageMenu} from '../../controller/account/ControllerManageMen
 @Component({
     selector: 'controller-manageuser',
     templateUrl: '../../app/view/account/viewmanageuser.html',
-    styleUrls: ['../../app/style/account/stylemanageuser.css'],
+    styleUrls: ['../../app/styles/account/stylemanageuser.css'],
     directives: [
     ]
 })

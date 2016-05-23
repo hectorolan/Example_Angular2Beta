@@ -12,7 +12,7 @@ import {ServicePlace} from '../../service/serviceplace';
 @Component({
     selector: 'controller-place',
     templateUrl: '../../app/view/place/viewplace.html',
-    styleUrls: ['../../app/style/place/styleplace.css'],
+    styleUrls: ['../../app/styles/place/styleplace.css'],
     directives: [
         ControllerPlaceDetail, 
         ControllerPlaceMenu

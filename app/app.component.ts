@@ -12,7 +12,7 @@ import {ServiceSchedule} from '../app/service/serviceschedule';
 
 @RouteConfig([
     {
-        path: '/',
+        path: '/pam',
         name: "Home",
         component: ControllerHome,
         useAsDefault: true
@@ -42,7 +42,7 @@ import {ServiceSchedule} from '../app/service/serviceschedule';
     selector: 'pam',
     templateUrl: 'app/view/viewapp.component.html',
     styleUrls: [
-        'app/style/styleviewapp.component.css'
+        'app/styles/styleviewapp.component.css'
     ],
     directives: [
         ROUTER_DIRECTIVES

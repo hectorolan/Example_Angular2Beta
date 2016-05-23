@@ -10,7 +10,7 @@ import {ServiceSchedule} from '../../service/serviceschedule';
     selector: 'controller-placeschedule',
     templateUrl: '../../app/view/place/viewplaceschedule.html',
     styleUrls: [
-        '../../app/style/place/styleplaceschedule.css'
+        '../../app/styles/place/styleplaceschedule.css'
     ]
 })
 export class ControllerPlaceSchedule implements OnInit{

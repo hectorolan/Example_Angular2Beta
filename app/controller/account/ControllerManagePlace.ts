@@ -15,7 +15,7 @@ import {Log} from '../../service/log';
 @Component({
     selector: 'controller-manageplace',
     templateUrl: '../../app/view/account/viewmanageplace.html',
-    styleUrls: ['../../app/style/account/stylemanageplace.css'],
+    styleUrls: ['../../app/styles/account/stylemanageplace.css'],
     directives: [
         ControllerManageMenu
     ]
