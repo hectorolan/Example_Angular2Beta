@@ -1,6 +1,8 @@
 import {Component} from '@angular/core';
 import {HTTP_PROVIDERS} from '@angular/http';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-deprecated';
+import {CORE_DIRECTIVES} from '@angular/common';
+import {FORM_DIRECTIVES} from '@angular/common';
 import {ControllerPlace} from '../app/controller/place/ControllerPlace';
 import {ControllerHome} from '../app/controller/home/ControllerHome';
 import {ControllerManagePlace} from '../app/controller/account/ControllerManagePlace';
@@ -45,7 +47,9 @@ import {ServiceSchedule} from '../app/service/serviceschedule';
         'app/styles/styleviewapp.component.css'
     ],
     directives: [
-        ROUTER_DIRECTIVES
+        ROUTER_DIRECTIVES,
+        CORE_DIRECTIVES,
+        FORM_DIRECTIVES
     ],
     providers: [
         ServiceMenuItem,
