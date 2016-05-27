@@ -8,7 +8,7 @@ import {MenuItem} from '../../model/menuItem';
 import {ServiceMenuItem} from '../../service/servicemenuitem';
 
 @Component({
-    selector: 'controller-setmenu',
+    selector: 'controller-managemenu',
     templateUrl: '../../app/view/account/viewmanagemenu.html',
     styleUrls: ['../../app/styles/account/stylemanagemenu.css']
 })
