@@ -12,7 +12,6 @@ import {ControllerFieldValidation} from '../../controller/pamsupport/ControllerF
 //Service
 import {ServicePlace} from '../../service/serviceplace';
 import {ServiceSchedule} from '../../service/serviceschedule';
-import {PamSupport} from '../../service/pamsupport';
 import {Log} from '../../service/log';
 
 @Component({
@@ -29,100 +28,179 @@ export class ControllerManagePlace implements OnInit {
     * To make diferent:
     * place.id == null ? then is new Place to create
     * if not: Edit Place*/
-    
-    //Original
-    place: Place;
-    schedule: Schedule;
-    //Bind Forms
+
     formPlace: ControlGroup;
-    formSchedule: Schedule;
-    
+    originalPlace: Place;
+    originalSchedule: Schedule;
+    errorSaving: string;
     title: string;
-    
+
     constructor(
         private _router: Router,
         private _formBuilder: FormBuilder,
         private _servicePlace: ServicePlace,
         private _serviceSchedule: ServiceSchedule
-    ){
+    ) {
     }
-    ngOnInit(){
+    ngOnInit() {
         //TODO
         /*
         * Here the app will look for the logged user to check
         * if a Place already exists, If not the user is creating the new
         * place. For now this only is for add places news
         */
-        this.ngOnInit_BuildForm();
         this.title = "Create Place";
-        this.formSchedule = new Schedule();
+        this.ngOnInit_BuildForm();
+        this.ngOnInit_GetSavedPlace();
     }
-    ngOnInit_BuildForm(){
+    ngOnInit_BuildForm() {
         this.formPlace = this._formBuilder.group({
-            name : new Control('', Validators.compose([
+            name: new Control('', Validators.compose([
                 Validators.required,
                 Validators.maxLength(25),
                 Validators.minLength(3),
             ])),
-            city: new Control(''),
-            image: [''],
-            category: [''],
-            type: [''],
-            phoneNumber: [''],
-            schedule: this._formBuilder.group({
-                mondayOpen: [''],
-                mondayClose: [''],
-                tuesdayOpen: [''],
-                tuesdayClose: [''],
-                wednesdayOpen: [''],
-                wednesdayClose: [''],
-                thursdayOpen: [''],
-                thursdayClose: [''],
-                fridayOpen: [''],
-                fridayClose: [''],
-                saturdayOpen: [''],
-                saturdayClose: [''],
-                sundayOpen: [''],
-                sundayClose:['']
-            })
+            city: new Control('', Validators.required),
+            //validate file.
+            image: new Control(''),
+            category: new Control('', Validators.required),
+            type: new Control('', Validators.required),
+            phoneNumber: new Control(''),
+            mondayOpen: new Control(''),
+            mondayClose: new Control(''),
+            tuesdayOpen: new Control(''),
+            tuesdayClose: new Control(''),
+            wednesdayOpen: new Control(''),
+            wednesdayClose: new Control(''),
+            thursdayOpen: new Control(''),
+            thursdayClose: new Control(''),
+            fridayOpen: new Control(''),
+            fridayClose: new Control(''),
+            saturdayOpen: new Control(''),
+            saturdayClose: new Control(''),
+            sundayOpen: new Control(''),
+            sundayClose: new Control('')
         });
         console.log(this.formPlace);
     }
-    gotoMenu(){
-        this._router.navigate(['SetMenu', {id: 1}]);
+    ngOnInit_GetSavedPlace() {
+        this.originalPlace = new Place();
+        this.originalSchedule = new Schedule();
     }
-    onSubmitSaveChanges(){
-        if (this.onValFormValid()) {
-            let command = this.getSubmitCommand();
-        }
-        console.error("Form not valid.");
+
+    /* Btn Menu - Ask for Save, Move to Menu */
+    gotoMenu() {
+        let place = this.placeFromControl();
+        let schedule = this.scheduleFromControl();
+        this.save(place, schedule);
+        this._router.navigate(['SetMenu', { id: 1 }]);
     }
-    onValFormValid(): boolean{
-        console.info(this.formPlace.value);
-        console.info(this.formPlace);
-        /*if (PamSupport.isNullOrEmpty(this.formPlace.name)) {
-            return false;
+
+    /* Submit Form - Save */
+    onSubmitSaveChanges() {
+        let place: Place = this.placeFromControl();
+        let schedule: Schedule = this.scheduleFromControl();
+        this.save(place, schedule);
+    }
+    /* Save */
+    save(place: Place, schedule: Schedule): boolean {
+        //if id exists - update Place
+        if (this.originalPlace.id) {
+            this.save_Update(place, schedule);
+            return true;
         }
-        if (PamSupport.isNullOrEmpty(this.formPlace.type)){
-            return false;
-        }
-        if (PamSupport.isNullOrEmpty(this.formPlace.category)){
-            return false;
-        }
-        if (PamSupport.isNullOrEmpty(this.formPlace.city)){
-            return false;
-        }*/
+        //Creating new Place
+        this.save_New(place, schedule);
         return true;
     }
-    print(control: any){
-        console.log(control);
-        console.log(this.formPlace);
+    /* Save Helpers - Start */
+    /* Save Confirm..TODO */
+    save_Confirm() {
+        //..TODO Yes, No, Cancel (cancel stops the page from moveon)
+        return true;
     }
-    /**
-     * Depending on the objects we will create new place/schedule or update.
-     */
-    getSubmitCommand(): string{
-        return "";
+    save_New(place: Place, schedule: Schedule) {
+        this._servicePlace.addPlace(place)
+            .subscribe(
+            place => this.save_ObservableSetPlace('New', place),
+            error => this.save_ObservableSetError('errorNew', error));
+        this._serviceSchedule.addSchedule(1,schedule)
+            .subscribe(
+                schedule => this.save_ObservableSetSchedule('New', schedule),
+                error => this.save_ObservableSetError("errorNewSchedule", error)
+            )
+    }
+    save_Update(place: Place, schedule: Schedule) {
+        if (Place.equal(place, this.originalPlace) && Schedule.equal(schedule, this.originalSchedule)) {
+            //Nothing Change - ..TODO Tell the user everything is untouched
+            Log.writeMessage("Place has no changes from original");
+            if (Schedule.equal(schedule, this.originalSchedule)) {
+                Log.writeMessage("Schedule has no changes from original");
+            }
+            return;
+        }
+        //Save
+        if (!Place.equal(place, this.originalPlace)) {
+            Log.writeMessage("Place has diferences");
+            place.id = this.originalPlace.id;
+            place.userId = this.originalPlace.userId;
+            this._servicePlace.updatePlace(place).subscribe(
+                place => this.save_ObservableSetPlace('Update', place),
+                error => this.save_ObservableSetError('errorUpdate', error)
+            );
+        }
+        if (!Schedule.equal(schedule, this.originalSchedule)) {
+            Log.writeMessage("Schedule has diferences");
+            schedule.id = this.originalSchedule.id;
+            schedule.placeId = this.originalSchedule.placeId;
+            this._serviceSchedule.updateSchedule(schedule).subscribe(
+                schedule => this.save_ObservableSetSchedule('Update', schedule),
+                error => this.save_ObservableSetError('errorUpdate', error)
+            );
+        }
+    }
+    save_ObservableSetPlace(message: string, place: Place) {
+        Log.writeMessage(place.name + ":" + message);
+        this.originalPlace = place;
+    }
+    save_ObservableSetSchedule(message: string, schedule: Schedule) {
+        Log.writeMessage(schedule.id + "id:" + message);
+        this.originalSchedule = schedule;
+    }
+    save_ObservableSetError(key: string, error: any) {
+        Log.writeMessage(error);
+        this.errorSaving = <string>error;
+    }
+    /* Save Helpers - End */
+
+    /* Get Place from control */
+    placeFromControl(): Place {
+        let place: Place = new Place();
+        place.name = this.formPlace.controls['name'].value;
+        place.category = this.formPlace.controls['category'].value;
+        place.city = this.formPlace.controls['city'].value;
+        place.type = this.formPlace.controls['type'].value;
+        place.image = this.formPlace.controls['image'].value;
+        place.phoneNumber = this.formPlace.controls['phoneNumber'].value;
+        return place;
+    }
+    /* Get Schedule from control */
+    scheduleFromControl(): Schedule {
+        let schedule: Schedule = new Schedule();
+        schedule.sundayOpen = this.formPlace.controls['sundayOpen'].value;
+        schedule.sundayClose = this.formPlace.controls['sundayClose'].value;
+        schedule.mondayOpen = this.formPlace.controls['mondayOpen'].value;
+        schedule.tuesdayOpen = this.formPlace.controls['tuesdayOpen'].value;
+        schedule.tuesdayClose = this.formPlace.controls['tuesdayClose'].value;
+        schedule.wednesdayOpen = this.formPlace.controls['wednesdayOpen'].value;
+        schedule.wednesdayClose = this.formPlace.controls['wednesdayClose'].value;
+        schedule.thursdayOpen = this.formPlace.controls['thursdayOpen'].value;
+        schedule.thursdayClose = this.formPlace.controls['thursdayClose'].value;
+        schedule.fridayOpen = this.formPlace.controls['fridayOpen'].value;
+        schedule.fridayClose = this.formPlace.controls['fridayClose'].value;
+        schedule.saturdayOpen = this.formPlace.controls['saturdayOpen'].value;
+        schedule.saturdayClose = this.formPlace.controls['saturdayClose'].value;
+        return schedule;
     }
 }
 
