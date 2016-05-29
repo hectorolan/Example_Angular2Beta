@@ -13,34 +13,39 @@ export class ServicePlace {
         private http: Http
     ) {
     }
-    /*
-     * Get a list of Places by criteria*/
+    /* Get a list of Places by criteria */
     getPlaces(): Observable<Place[]> {
         let options = this.getOptions();
         return this.http.get(this.path, options)
             .map(this.extractData)
             .catch(this.handleError);
     }
-    /*
-     * Get a specific Place*/
+    /* Get a specific Place */
     getPlace(id: number): Observable<Place> {
         let options = this.getOptions();
         return this.http.get(this.path + "/" + id, options)
             .map(this.extractData)
             .catch(this.handleError);
-    } 
-    /*
-     * Save a new Place*/
-    addPlace(name: string): Observable<Place> {
-        //TODO
-        let body = JSON.stringify({ name });
+    }
+    /* Save a new Place */
+    addPlace(place: Place): Observable<Place> {
+        let body = JSON.stringify(place);
         let options = this.getOptions();
+        Log.writeMessage(body);
         return this.http.post(this.path, body, options)
             .map(this.extractData)
             .catch(this.handleError);
     }
-    /*
-     * Set Header */
+    /* Update Place */
+    updatePlace(place: Place): Observable<Place> {
+        let body = JSON.stringify(place);
+        let options = this.getOptions();
+        let path = this.path + "/" + place.id;
+        return this.http.put(path, body, options)
+            .map(this.extractData)
+            .catch(this.handleError);
+    }
+    /* Set Header */
     private getOptions(): RequestOptions{
         let headers = new Headers({ 
                 'Content-Type': 'application/json'
@@ -49,8 +54,7 @@ export class ServicePlace {
         let options = new RequestOptions({ headers: headers });
         return options;
     }
-    /*
-     * Get Request*/
+    /* Get Request */
     private extractData(response: Response) {
         if (response.status < 200 || response.status >= 300) {
             try {
@@ -63,8 +67,7 @@ export class ServicePlace {
         Log.writeError(body);
         return body || {};
     }
-    /*
-     * Error*/
+    /* Error */
     private handleError(error: any) {
         let message = error.message || 'Server error';
         Log.writeError(message);
