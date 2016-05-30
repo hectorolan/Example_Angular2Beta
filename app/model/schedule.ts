@@ -38,15 +38,13 @@ export class Schedule {
     }
 
     static equal(s1: Schedule, s2: Schedule): boolean {
-        if (s1.sundayOpen && s2.sundayOpen) {
-            if (s1.sundayOpen != s2.sundayOpen) {
-                return false;
-            }
+        if (s1.sundayOpen != s2.sundayOpen) {
+            return false;
         }
         if (s1.sundayClose != s2.sundayClose) {
             return false;
         }
-        if (s1.mondayOpen != s2.mondayClose) {
+        if (s1.mondayOpen != s2.mondayOpen) {
             return false;
         }
         if (s1.mondayClose != s2.mondayClose) {
