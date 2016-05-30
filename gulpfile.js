@@ -10,6 +10,7 @@ var browserSync = require('browser-sync').create();
 gulp.task('start', ['watch']);
 gulp.task('build', ['compile:ts','compile:sass','copy:libs','copy:styles','copy:assets']);
 gulp.task('default', ['build']);
+gulp.task('dev', ['copy:libsDev','copy:stylesDev']);
 
 //Delete distribution directory
 gulp.task('clean', function (){
@@ -56,6 +57,20 @@ gulp.task('copy:libs', function() {
    ], {cwd: "node_modules/**"})
    .pipe(gulp.dest('dist/libs'))
 });
+gulp.task('copy:libsDev', function() {
+   return gulp.src([
+       'es6-shim/es6-shim.min.js',
+       'zone.js/dist/zone.js',
+       'reflect-metadata/Reflect.js',
+       'systemjs/dist/system.src.js',
+       'rxjs/**/*.js',
+       '\@angular/**/*.js',
+       'jquery/dist/jquery.js',
+       'tether/dist/js/tether.js',
+       'bootstrap/dist/js/bootstrap.js'
+   ], {cwd: "node_modules/**"})
+   .pipe(gulp.dest('libs'))
+});
 //Copy dependecies styles
 gulp.task('copy:styles', function() {
    return gulp.src([
@@ -63,6 +78,13 @@ gulp.task('copy:styles', function() {
        'node_modules/bootstrap/dist/css/bootstrap.css'
    ])
    .pipe(gulp.dest('dist/app/styles'))
+});
+gulp.task('copy:stylesDev', function() {
+   return gulp.src([
+       'node_modules/tether/dist/css/tether.css',
+       'node_modules/bootstrap/dist/css/bootstrap.css'
+   ])
+   .pipe(gulp.dest('app/styles'))
 });
 //Copy all the project files except the typescripts
 gulp.task('copy:assets', function(){
@@ -85,3 +107,6 @@ gulp.task('minify', ['copy:assets'], function(){
     .pipe(concat('all.js'))
     .pipe(gulp.dest('dist/app/libs/'));
 });
+
+
+    //"start": "gulp clean && gulp build && concurrently \"gulp start\" \"lite-server\" ",
