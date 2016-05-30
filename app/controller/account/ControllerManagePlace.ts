@@ -92,45 +92,49 @@ export class ControllerManagePlace implements OnInit {
     gotoMenu() {
         let place = this.placeFromControl();
         let schedule = this.scheduleFromControl();
-        this.save(place, schedule);
+        this.save();
         this._router.navigate(['SetMenu', { id: 1 }]);
     }
 
     /* Submit Form - Save */
     onSubmitSaveChanges() {
-        let place: Place = this.placeFromControl();
-        let schedule: Schedule = this.scheduleFromControl();
-        this.save(place, schedule);
+        this.save();
     }
     /* Save */
-    save(place: Place, schedule: Schedule): boolean {
+    save() {
         //if id exists - update Place
         if (this.originalPlace.id) {
-            this.save_Update(place, schedule);
-            return true;
+            this.save_Update();
+            return;
         }
         //Creating new Place
-        this.save_New(place, schedule);
-        return true;
+        this.save_New();
     }
     /* Save Helpers - Start */
-    /* Save Confirm..TODO */
     save_Confirm() {
         //..TODO Yes, No, Cancel (cancel stops the page from moveon)
         return true;
     }
-    save_New(place: Place, schedule: Schedule) {
+    save_New() {
+        let place: Place = this.placeFromControl();
         this._servicePlace.addPlace(place)
             .subscribe(
-            place => this.save_ObservableSetPlace('New', place),
+            place => this.save_Schedule(place),
             error => this.save_ObservableSetError('errorNew', error));
-        this._serviceSchedule.addSchedule(1,schedule)
+    }
+    save_Schedule(place: Place) {
+        //Called just when new
+        this.save_ObservableSetPlace('New', place);
+        let schedule: Schedule = this.scheduleFromControl();
+        this._serviceSchedule.addSchedule(place.id, schedule)
             .subscribe(
                 schedule => this.save_ObservableSetSchedule('New', schedule),
-                error => this.save_ObservableSetError("errorNewSchedule", error)
-            )
+                error => this.save_ObservableSetError('errorNew', error)
+            );
     }
-    save_Update(place: Place, schedule: Schedule) {
+    save_Update() {
+        let place: Place = this.placeFromControl();
+        let schedule: Schedule = this.scheduleFromControl();
         if (Place.equal(place, this.originalPlace) && Schedule.equal(schedule, this.originalSchedule)) {
             //Nothing Change - ..TODO Tell the user everything is untouched
             Log.writeMessage("Place has no changes from original");
@@ -164,7 +168,7 @@ export class ControllerManagePlace implements OnInit {
         this.originalPlace = place;
     }
     save_ObservableSetSchedule(message: string, schedule: Schedule) {
-        Log.writeMessage(schedule.id + "id:" + message);
+        Log.writeMessage(schedule.placeId + "id:" + message);
         this.originalSchedule = schedule;
     }
     save_ObservableSetError(key: string, error: any) {
@@ -190,6 +194,7 @@ export class ControllerManagePlace implements OnInit {
         schedule.sundayOpen = this.formPlace.controls['sundayOpen'].value;
         schedule.sundayClose = this.formPlace.controls['sundayClose'].value;
         schedule.mondayOpen = this.formPlace.controls['mondayOpen'].value;
+        schedule.mondayClose = this.formPlace.controls['mondayClose'].value;
         schedule.tuesdayOpen = this.formPlace.controls['tuesdayOpen'].value;
         schedule.tuesdayClose = this.formPlace.controls['tuesdayClose'].value;
         schedule.wednesdayOpen = this.formPlace.controls['wednesdayOpen'].value;
