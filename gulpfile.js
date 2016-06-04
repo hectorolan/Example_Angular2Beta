@@ -53,6 +53,7 @@ gulp.task('copy:libs', function() {
        '\@angular/**/*.js',
        'jquery/dist/jquery.js',
        'tether/dist/js/tether.js',
+       'material-design-lite/material.min.js',
        'bootstrap/dist/js/bootstrap.js'
    ], {cwd: "node_modules/**"})
    .pipe(gulp.dest('dist/libs'))
@@ -67,6 +68,7 @@ gulp.task('copy:libsDev', function() {
        '\@angular/**/*.js',
        'jquery/dist/jquery.js',
        'tether/dist/js/tether.js',
+       'material-design-lite/material.min.js',
        'bootstrap/dist/js/bootstrap.js'
    ], {cwd: "node_modules/**"})
    .pipe(gulp.dest('libs'))
@@ -75,14 +77,16 @@ gulp.task('copy:libsDev', function() {
 gulp.task('copy:styles', function() {
    return gulp.src([
        'node_modules/tether/dist/css/tether.css',
-       'node_modules/bootstrap/dist/css/bootstrap.css'
+       'node_modules/bootstrap/dist/css/bootstrap.css',
+       'node_modules/material-design-lite/dist/material.blue_grey-amber.min.css'
    ])
    .pipe(gulp.dest('dist/app/styles'))
 });
 gulp.task('copy:stylesDev', function() {
    return gulp.src([
        'node_modules/tether/dist/css/tether.css',
-       'node_modules/bootstrap/dist/css/bootstrap.css'
+       'node_modules/bootstrap/dist/css/bootstrap.css',
+       'node_modules/material-design-lite/dist/material.blue_grey-amber.min.css'
    ])
    .pipe(gulp.dest('app/styles'))
 });
