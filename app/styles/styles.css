@@ -5,3 +5,10 @@ body {
   font-family: 'Roboto';
   font-weight: 400;
 }
+.pam-schedule-textfield{
+  padding-top: 5px;
+  padding-bottom: 15px;
+}
+.pam-manage-card{
+  width: 100%;
+}

@@ -1,35 +1,39 @@
-<form mdl class="mdl-cell--12-col" [ngFormModel]="formPlace" (ngSubmit)="onSubmitSaveChanges()">
+<form mdl [ngFormModel]="formPlace" (ngSubmit)="onSubmitSaveChanges()">
     <div class="mdl-grid">
         <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet">
-            <h3>Place Information</h3>
-            <!-- place name -->
-            <fieldset>
-                <i class="material-icons">face</i>
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input is-invalid" type="text" ngControl="name" #name="ngForm" (keypress)="key(name)">
-                    <label class="mdl-textfield__label" for="name">Place Name</label>
-                    <controller-fieldvalidation [control]="formPlace.controls['name']"></controller-fieldvalidation>
+            <!-- Place Detail Card -->
+            <div class="mdl-card mdl-shadow--2dp pam-manage-card">
+                <div class="mdl-card__title">
+                    <h3 class="mdl-card__title-text"><i class="material-icons">face</i>Place Information</h3>
                 </div>
-            </fieldset>
-            <!-- address -->
-            <fieldset>
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="text" ngControl="city" #city="ngForm">
-                    <label class="mdl-textfield__label" for="city">Address</label>
-                </div>
-                <controller-fieldvalidation [control]="formPlace.controls['city']"></controller-fieldvalidation>
-            </fieldset>
-            <!-- phone number -->
-            <fieldset>
-                <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-                    <input class="mdl-textfield__input" type="text"  ngControl="phoneNumber" #phoneNumber="ngForm">
-                    <label class="mdl-textfield__label" for="phoneNumber">Phone Number</label>
-                </div>
-            </fieldset>
-            <!-- category -->
-            <fieldset class="form-group col-xs-12 col-sm-5 category-type">
-                <small class="text-muted ">Category</small>
-                <select class="form-control c-select" ngControl="category" #category="ngForm">
+                <div class="mdl-card__supporting-text">
+                    <!-- place name -->
+                    <div class="mdl-cell mdl-cell--12-col">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell--12-col">
+                            <input class="mdl-textfield__input" type="text" ngControl="name" #name="ngForm" (keypress)="key(name)">
+                            <label class="mdl-textfield__label" for="name">Place Name</label>
+                        </div>
+                        <controller-fieldvalidation [control]="formPlace.controls['name']"></controller-fieldvalidation>
+                    </div>
+                    <!-- address -->
+                    <div class="mdl-cell mdl-cell--12-col">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell--12-col">
+                            <input class="mdl-textfield__input" type="text" ngControl="city" #city="ngForm">
+                            <label class="mdl-textfield__label" for="city">Address</label>
+                        </div>
+                        <controller-fieldvalidation [control]="formPlace.controls['city']"></controller-fieldvalidation>
+                    </div>
+                    <!-- phone number -->
+                    <div class="mdl-cell mdl-cell--12-col">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell--12-col">
+                            <input class="mdl-textfield__input" type="text" ngControl="phoneNumber" #phoneNumber="ngForm">
+                            <label class="mdl-textfield__label" for="phoneNumber">Phone Number</label>
+                        </div>
+                    </div>
+                    <!-- category -->
+                    <div class="mdl-cell mdl-cell--12-col">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell--12-col">
+                            <select class="mdl-textfield__input" ngControl="category" #category="ngForm">
                                     <option>Mexican</option>
                                     <option>Puerto Rican</option>
                                     <option>American</option>
@@ -38,120 +42,125 @@
                                     <option>Perubian</option>
                                     <option>Other</option>
                                 </select>
-                <controller-fieldvalidation [control]="formPlace.controls['category']"></controller-fieldvalidation>
-            </fieldset>
-            <div class="col-xs-0 col-sm-1 "></div>
-            <!-- type -->
-            <fieldset class="form-group col-xs-12 col-sm-5 category-type">
-                <small class="text-muted">Type</small>
-                <select class="form-control c-select" ngControl="type" #type="ngForm">
+                            <label class="mdl-textfield__label" for="category">Category</label>
+                        </div>
+                        <controller-fieldvalidation [control]="formPlace.controls['category']"></controller-fieldvalidation>
+                    </div>
+                    <!-- type -->
+                    <div class="mdl-cell mdl-cell--12-col">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell--12-col">
+                            <select class="mdl-textfield__input" ngControl="type" #type="ngForm">
                                     <option>Restaurant</option>
                                     <option>Bar</option>
                                     <option>Food Truck</option>
                                     <option>Lounge</option>
                                     <option>Other</option>
                                 </select>
-                <controller-fieldvalidation [control]="formPlace.controls['type']"></controller-fieldvalidation>
-            </fieldset>
+                            <label class="mdl-textfield__label" for="type">Type</label>
+                        </div>
+                        <controller-fieldvalidation [control]="formPlace.controls['type']"></controller-fieldvalidation>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="mdl-cell mdl-cell--6-col mdl-cell--4-col-tablet">
-            <!-- schedule -->
-            <h3>Open Hours</h3>
-            <!-- sunday -->
-            <fieldset class="form-group">
-                <small class="text-muted text-header">Sunday</small>
-                <div class="input-group input-group-sm col-xs-12 col-sm-4">
-                    <span class="input-group-addon">From</span>
-                    <input type="time" class="form-control" ngControl="sundayOpen" #sundayOpen="ngForm">
+        <div class="mdl-cell mdl-cell--6-col mdl-cell--8-col-tablet mdl-grid--no-spacing">
+            <!-- Open Hours Card -->
+            <div class="mdl-card mdl-shadow--2dp pam-manage-card">
+                <!-- schedule -->
+                <div class="mdl-card__title">
+                    <h3 class="mdl-card__title-text">Open Hours</h3>
                 </div>
-                <div class="col-xs-0 col-sm-1"></div>
-                <div class="input-group input-group-sm col-xs-12 col-sm-4">
-                    <span class="input-group-addon">To</span>
-                    <input type="time" class="form-control" ngControl="sundayClose" #sundayClose="ngForm">
+                <div class="mdl-card__supporting-text">
+                    <!-- sunday -->
+                    <div class="mdl-cell mdl-cell--12-col">
+                        <div class="mdl-textfield mdl-js-textfield mdl-cell--4-col mdl-cell--12-col-tablet pam-schedule-textfield">
+                            Sunday
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-cell--4-col pam-schedule-textfield">
+                            <input type="time" class="mdl-textfield__input" ngControl="sundayOpen" #sundayOpen="ngForm">
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-cell--4-col pam-schedule-textfield">
+                            <input type="time" class="mdl-textfield__input" ngControl="sundayClose" #sundayClose="ngForm">
+                        </div>
+                    </div>
+                    <!-- monday -->
+                    <div class="mdl-cell mdl-cell--12-col">
+                        <div class="mdl-textfield mdl-js-textfield mdl-cell--4-col mdl-cell--12-col-tablet pam-schedule-textfield">
+                            Monday
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-cell--4-col pam-schedule-textfield">
+                            <input type="time" class="mdl-textfield__input" ngControl="mondayOpen" #mondayOpen="ngForm">
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-cell--4-col pam-schedule-textfield">
+                            <input type="time" class="mdl-textfield__input" ngControl="mondayClose" #mondayClose="ngForm">
+                        </div>
+                    </div>
+                    <!-- tusday -->
+                    <div class="mdl-cell mdl-cell--12-col">
+                        <div class="mdl-textfield mdl-js-textfield mdl-cell--4-col mdl-cell--12-col-tablet pam-schedule-textfield">
+                            Tuesday
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-cell--4-col pam-schedule-textfield">
+                            <input type="time" class="mdl-textfield__input" ngControl="tuesdayOpen" #tuesdayOpen="ngForm">
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-cell--4-col pam-schedule-textfield">
+                            <input type="time" class="mdl-textfield__input" ngControl="tuesdayClose" #tuesdayClose="ngForm">
+                        </div>
+                    </div>
+                    <!-- wednesday -->
+                    <div class="mdl-cell mdl-cell--12-col">
+                        <div class="mdl-textfield mdl-js-textfield mdl-cell--4-col mdl-cell--12-col-tablet pam-schedule-textfield">
+                            Wednesday
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-cell--4-col pam-schedule-textfield">
+                            <input type="time" class="mdl-textfield__input" ngControl="wednesdayOpen" #wednesdayOpen="ngForm">
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-cell--4-col pam-schedule-textfield">
+                            <input type="time" class="mdl-textfield__input" ngControl="wednesdayClose" #wednesdayClose="ngForm">
+                        </div>
+                    </div>
+                    <!-- thrusday -->
+                    <div class="mdl-cell mdl-cell--12-col">
+                        <div class="mdl-textfield mdl-js-textfield mdl-cell--4-col mdl-cell--12-col-tablet pam-schedule-textfield">
+                            Thrusday
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-cell--4-col pam-schedule-textfield">
+                            <input type="time" class="mdl-textfield__input" ngControl="thursdayOpen" #thursdayOpen="ngForm">
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-cell--4-col pam-schedule-textfield">
+                            <input type="time" class="mdl-textfield__input" ngControl="thursdayClose" #thursdayClose="ngForm">
+                        </div>
+                    </div>
+                    <!-- friday -->
+                    <div class="mdl-cell mdl-cell--12-col">
+                        <div class="mdl-textfield mdl-js-textfield mdl-cell--4-col mdl-cell--12-col-tablet pam-schedule-textfield">
+                            Friday
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-cell--4-col pam-schedule-textfield">
+                            <input type="time" class="mdl-textfield__input" ngControl="fridayOpen" #fridayOpen="ngForm">
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-cell--4-col pam-schedule-textfield">
+                            <input type="time" class="mdl-textfield__input" ngControl="fridayClose" #fridayClose="ngForm">
+                        </div>
+                    </div>
+                    <!-- saturday -->
+                    <div class="mdl-cell mdl-cell--12-col">
+                        <div class="mdl-textfield mdl-js-textfield mdl-cell--4-col mdl-cell--12-col-tablet pam-schedule-textfield">
+                            Saturday
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-cell--4-col pam-schedule-textfield">
+                            <input type="time" class="mdl-textfield__input" ngControl="saturdayOpen" #saturdayOpen="ngForm">
+                        </div>
+                        <div class="mdl-textfield mdl-js-textfield mdl-cell--4-col pam-schedule-textfield">
+                            <input type="time" class="mdl-textfield__input" ngControl="saturdayClose" #saturdayClose="ngForm">
+                        </div>
+                    </div>
                 </div>
-            </fieldset>
-            <!-- monday -->
-            <fieldset class="form-group">
-                <small class="text-muted text-header">Monday</small>
-                <div class="input-group input-group-sm col-xs-12 col-sm-4">
-                    <span class="input-group-addon">From</span>
-                    <input type="time" class="form-control" ngControl="mondayOpen" #mondayOpen="ngForm">
-                </div>
-                <div class="col-xs-0 col-sm-1"></div>
-                <div class="input-group input-group-sm col-xs-12 col-sm-4">
-                    <span class="input-group-addon">To</span>
-                    <input type="time" class="form-control" ngControl="mondayClose" #mondayClose="ngForm">
-                </div>
-            </fieldset>
-            <!-- tusday -->
-            <fieldset class="form-group">
-                <small class="text-muted text-header">Tuesday</small>
-                <div class="input-group input-group-sm col-xs-12 col-sm-4">
-                    <span class="input-group-addon">From</span>
-                    <input type="time" class="form-control" ngControl="tuesdayOpen" #tuesdayOpen="ngForm">
-                </div>
-                <div class="col-xs-0 col-sm-1"></div>
-                <div class="input-group input-group-sm col-xs-12 col-sm-4">
-                    <span class="input-group-addon">To</span>
-                    <input type="time" class="form-control" ngControl="tuesdayClose" #tuesdayClose="ngForm">
-                </div>
-            </fieldset>
-            <!-- wednesday -->
-            <fieldset class="form-group">
-                <small class="text-muted text-header">Wednesday</small>
-                <div class="input-group input-group-sm col-xs-12 col-sm-4">
-                    <span class="input-group-addon">From</span>
-                    <input type="time" class="form-control" ngControl="wednesdayOpen" #wednesdayOpen="ngForm">
-                </div>
-                <div class="col-xs-0 col-sm-1"></div>
-                <div class="input-group input-group-sm col-xs-12 col-sm-4">
-                    <span class="input-group-addon">To</span>
-                    <input type="time" class="form-control" ngControl="wednesdayClose" #wednesdayClose="ngForm">
-                </div>
-            </fieldset>
-            <!-- thrusday -->
-            <fieldset class="form-group">
-                <small class="text-muted text-header">Thursday</small>
-                <div class="input-group input-group-sm col-xs-12 col-sm-4">
-                    <span class="input-group-addon">From</span>
-                    <input type="time" class="form-control" ngControl="thursdayOpen" #thursdayOpen="ngForm">
-                </div>
-                <div class="col-xs-0 col-sm-1"></div>
-                <div class="input-group input-group-sm col-xs-12 col-sm-4">
-                    <span class="input-group-addon">To</span>
-                    <input type="time" class="form-control" ngControl="thursdayClose" #thursdayClose="ngForm">
-                </div>
-            </fieldset>
-            <!-- friday -->
-            <fieldset class="form-group">
-                <small class="text-muted text-header">Friday</small>
-                <div class="input-group input-group-sm col-xs-12 col-sm-4">
-                    <span class="input-group-addon">From</span>
-                    <input type="time" class="form-control" ngControl="fridayOpen" #fridayOpen="ngForm">
-                </div>
-                <div class="col-xs-0 col-sm-1"></div>
-                <div class="input-group input-group-sm col-xs-12 col-sm-4">
-                    <span class="input-group-addon">To</span>
-                    <input type="time" class="form-control" ngControl="fridayClose" #fridayClose="ngForm">
-                </div>
-            </fieldset>
-            <!-- saturday -->
-            <fieldset class="form-group">
-                <small class="text-muted text-header">Saturday</small>
-                <div class="input-group input-group-sm col-xs-12 col-sm-4">
-                    <span class="input-group-addon">From</span>
-                    <input type="time" class="form-control" ngControl="saturdayOpen" #saturdayOpen="ngForm">
-                </div>
-                <div class="col-xs-0 col-sm-1"></div>
-                <div class="input-group input-group-sm col-xs-12 col-sm-4">
-                    <span class="input-group-addon">To</span>
-                    <input type="time" class="form-control" ngControl="saturdayClose" #saturdayClose="ngForm">
-                </div>
-            </fieldset>
+            </div>
         </div>
-        <!-- submit -->
+        <!-- submit
         <fieldset class="form-group menu-container">
             <button type="submit" class="btn btn-primary-outline" role="button">Save Changes</button>
-        </fieldset>
+        </fieldset> -->
     </div>
 </form>
