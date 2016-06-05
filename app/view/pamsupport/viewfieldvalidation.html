@@ -1,5 +1,5 @@
-//TODO Think in something new
-<div *ngIf="control.errors" [hidden]="control.valid">
+<!--TODO Think in something new-->
+<div *ngIf="control.errors" [hidden]="control.valid || control.pristine">
     <span *ngIf="control.errors.required" [hidden]="!control.errors.required">Required</span>
     <span *ngIf="control.errors.minlength" [hidden]="!control.errors.minlength">At least {{control.errors.minlength.requiredLength}}</span>
     <span *ngIf="control.errors.maxlength" [hidden]="!control.errors.maxlength">Max {{control.errors.maxlength.requiredLength}} characters</span>
