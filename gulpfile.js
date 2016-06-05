@@ -78,7 +78,7 @@ gulp.task('copy:styles', function() {
    return gulp.src([
        'node_modules/tether/dist/css/tether.css',
        'node_modules/bootstrap/dist/css/bootstrap.css',
-       'node_modules/material-design-lite/dist/material.blue_grey-amber.min.css'
+       'node_modules/material-design-lite/dist/material.grey-orange.min.css'
    ])
    .pipe(gulp.dest('dist/app/styles'))
 });
@@ -86,7 +86,7 @@ gulp.task('copy:stylesDev', function() {
    return gulp.src([
        'node_modules/tether/dist/css/tether.css',
        'node_modules/bootstrap/dist/css/bootstrap.css',
-       'node_modules/material-design-lite/dist/material.blue_grey-amber.min.css'
+       'node_modules/material-design-lite/dist/material.grey-orange.min.css'
    ])
    .pipe(gulp.dest('app/styles'))
 });
