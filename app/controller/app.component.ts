@@ -3,14 +3,15 @@ import {HTTP_PROVIDERS} from '@angular/http';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-deprecated';
 import {CORE_DIRECTIVES} from '@angular/common';
 import {FORM_DIRECTIVES} from '@angular/common';
-import {ControllerPlace} from '../app/controller/place/ControllerPlace';
-import {ControllerHome} from '../app/controller/home/ControllerHome';
-import {ControllerManagePlace} from '../app/controller/account/ControllerManagePlace';
-import {ControllerManageMenu} from '../app/controller/account/ControllerManageMenu';
-import {ControllerManageUser} from '../app/controller/account/ControllerManageUser';
-import {ServicePlace} from '../app/service/serviceplace';
-import {ServiceMenuItem} from '../app/service/servicemenuitem';
-import {ServiceSchedule} from '../app/service/serviceschedule';
+import {ControllerPlace} from '../../app/controller/place/ControllerPlace';
+import {ControllerHome} from '../../app/controller/home/ControllerHome';
+import {ControllerManagePlace} from '../../app/controller/account/ControllerManagePlace';
+import {ControllerManagePlaceDetail} from '../../app/controller/account/place/ControllerManagePlaceDetail';
+import {ControllerManageMenu} from '../../app/controller/account/place/ControllerManageMenu';
+import {ControllerManageUser} from '../../app/controller/account/ControllerManageUser';
+import {ServicePlace} from '../../app/service/serviceplace';
+import {ServiceMenuItem} from '../../app/service/servicemenuitem';
+import {ServiceSchedule} from '../../app/service/serviceschedule';
 
 @RouteConfig([
     {
@@ -43,9 +44,6 @@ import {ServiceSchedule} from '../app/service/serviceschedule';
 @Component({
     selector: 'pam',
     templateUrl: 'app/view/viewapp.component.html',
-    styleUrls: [
-        'app/styles/styleviewapp.component.css'
-    ],
     directives: [
         ROUTER_DIRECTIVES,
         CORE_DIRECTIVES,
@@ -59,5 +57,7 @@ import {ServiceSchedule} from '../app/service/serviceschedule';
         ROUTER_PROVIDERS
     ]
 })
-export class AppComponent { }
+export class AppComponent {
+    
+ }
 //
