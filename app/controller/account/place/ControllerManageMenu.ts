@@ -2,15 +2,14 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router-deprecated';
 //Model
-import {Place} from '../../model/Place';
-import {MenuItem} from '../../model/menuItem';
+import {Place} from '../../../model/Place';
+import {MenuItem} from '../../../model/menuItem';
 //ServiceMenuItem
-import {ServiceMenuItem} from '../../service/servicemenuitem';
+import {ServiceMenuItem} from '../../../service/servicemenuitem';
 
 @Component({
     selector: 'controller-managemenu',
-    templateUrl: '../../app/view/account/viewmanagemenu.html',
-    styleUrls: ['../../app/styles/account/stylemanagemenu.css']
+    templateUrl: '../../../app/view/account/place/viewmanagemenu.html'
 })
 export class ControllerManageMenu implements OnInit {
     
