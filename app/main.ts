@@ -1,6 +1,9 @@
 /// <reference path="../typings/browser.d.ts" />
 import {bootstrap}    from '@angular/platform-browser-dynamic';
-import {AppComponent} from './app.component';
+import {AppComponent} from './controller/app.component';
+import {provide, PLATFORM_DIRECTIVES} from '@angular/core';
+import {MDL_DIRECTIVE} from '../app/directives/UpgradeMDL';
 
-
-bootstrap(AppComponent);
+bootstrap(AppComponent, [
+  provide(PLATFORM_DIRECTIVES, {useValue: MDL_DIRECTIVE, multi: true}),
+]);
