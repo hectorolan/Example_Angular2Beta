@@ -9,7 +9,6 @@ import {ControllerPlaceSchedule} from '../../controller/place/ControllerPlaceSch
 @Component({
     selector: 'controller-placedetail',
     templateUrl: '../../app/view/place/viewplacedetail.html',
-    styleUrls:['../../app/styles/place/styleplacedetail.css'],
     directives: [
         ControllerPlaceSchedule
     ]

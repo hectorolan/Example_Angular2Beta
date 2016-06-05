@@ -6,8 +6,7 @@ import {Place} from '../../model/place';
 
 @Component({
     selector: 'controller-homeplacedetail',
-    templateUrl: '../../app/view/home/viewhomeplacedetail.html',
-    styleUrls:['../../app/styles/home/stylehomeplacedetail.css']
+    templateUrl: '../../app/view/home/viewhomeplacedetail.html'
 })
 export class ControllerHomePlaceDetail implements OnInit {
     @Input() place: Place;

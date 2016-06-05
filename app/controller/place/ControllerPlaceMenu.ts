@@ -11,7 +11,6 @@ import {ServiceMenuItem} from '../../service/servicemenuitem';
 @Component({
     selector: 'controller-placemenu',
     templateUrl: '../../app/view/place/viewplacemenu.html',
-    styleUrls: ['../../app/styles/place/styleplacemenu.css']
 })
 export class ControllerPlaceMenu implements OnInit {
     menuItems: MenuItem[] = [];

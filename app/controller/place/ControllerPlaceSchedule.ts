@@ -9,9 +9,6 @@ import {ServiceSchedule} from '../../service/serviceschedule';
 @Component({
     selector: 'controller-placeschedule',
     templateUrl: '../../app/view/place/viewplaceschedule.html',
-    styleUrls: [
-        '../../app/styles/place/styleplaceschedule.css'
-    ]
 })
 export class ControllerPlaceSchedule implements OnInit{
     schedule: Schedule;

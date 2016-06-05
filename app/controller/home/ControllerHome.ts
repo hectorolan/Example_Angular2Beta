@@ -12,7 +12,6 @@ import {ServicePlace} from '../../service/serviceplace'
 @Component({
     selector: 'controller-home',
     templateUrl: '../../app/view/home/viewhome.html',
-    styleUrls: ['../../app/styles/home/stylehome.css'],
     directives: [
         ControllerHomePlaceDetail
     ]
