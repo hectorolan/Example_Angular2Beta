@@ -1,17 +1,11 @@
 //Library
-import {Component, OnInit} from '@angular/core';
-import {RouteConfig} from '@angular/router-deprecated';
-//Model
-import {Place} from '../../model/place';
-import {Schedule} from '../../model/schedule';
-import {MenuItem} from '../../model/menuitem';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 //Controller
 import {ControllerManagePlaceDetail} from '../../controller/account/place/ControllerManagePlaceDetail';
 import {ControllerManageMenu} from '../../controller/account/place/ControllerManageMenu';
 //Service
-import {ServicePlace} from '../../service/serviceplace';
-import {ServiceSchedule} from '../../service/serviceschedule';
-import {ServiceMenuItem} from '../../service/servicemenuitem';
+import {ServiceSessionData} from '../../service/servicesessiondata';
+import {ServiceToolbar, IActionBar} from '../../service/servicetoolbar';
 //Log
 import {Log} from '../../service/log';
 
@@ -23,53 +17,58 @@ import {Log} from '../../service/log';
         ControllerManageMenu
     ]
 })
-export class ControllerManagePlace implements OnInit {
-    //Database original objects
-    dbPlace: Place;
-    dbSchedule: Schedule;
-    dbMenuItems: MenuItem[] = [];
+export class ControllerManagePlace implements OnInit, OnDestroy {
     //Section Active
     tabPlaceActive = true;
     tabMenuActive = false;
     tabPrintsActive = false;
-    
-    errors = {
-      servicePlaceError: "",
-      serviceScheduleError: "",
-      serviceMenuItemError: ""  
-    };
 
     constructor(
-        private _servicePlace: ServicePlace,
-        private _serviceSchedule: ServiceSchedule,
-        private _serviceMenuItem: ServiceMenuItem
-    ) {
+        private _serviceSessionData: ServiceSessionData,
+        private _serviceToolbar: ServiceToolbar) {
     }
     ngOnInit() {
-        this.LoadDBData();
+        this.setActionBarMenu("place");
+    }
+    /* OnDestroy */
+    ngOnDestroy() {
+        //Set menu to defaults
+        this._serviceToolbar.updateToolbar("");
     }
     //Events
-    onClickTab(tab:string){
-        this.tabPlaceActive = tab == "place" ? true : false;
-        this.tabMenuActive = tab == "menu" ? true : false;
-        this.tabPrintsActive = tab == "prints" ? true : false;
+    onClickTab(tab: string, iActionBar: IActionBar) {
+        //Tabs init
+        this.tabPlaceActive = false;
+        this.tabMenuActive = false;
+        this.tabPrintsActive = false;
+        //Tabs select 
+        //Update Menu
+        switch (tab) {
+            case "place":
+            this.tabPlaceActive = true;
+                break;
+            case "menu":
+            this.tabMenuActive = true;
+                break;
+            case "prints":
+            this.tabPrintsActive = true;
+                break;
+        }
+        this.setActionBarMenu(tab);
+        this._serviceToolbar.btnActions = iActionBar;
     }
-    //Load Data from services
-    LoadDBData(){
-        this.LoadPlace();
-        this.LoadSchedule();
-        this.LoadMenuItem();
-    }
-    LoadPlace(){
-        this.dbPlace = new Place();
-        this.errors.servicePlaceError = "";
-    }
-    LoadSchedule(){
-        this.dbSchedule = new Schedule();
-        this.errors.serviceScheduleError = "";
-    }
-    LoadMenuItem(){
-        this.errors.serviceMenuItemError = "";
+    setActionBarMenu(tab: string) {
+        switch (tab) {
+            case "place":
+                this._serviceToolbar.updateToolbar(ServiceToolbar.MENUMANAGEPLACE);
+                break;
+            case "menu":
+                this._serviceToolbar.updateToolbar(ServiceToolbar.MENUMANAGEMENU);
+                break;
+            case "prints":
+                this._serviceToolbar.updateToolbar(ServiceToolbar.MENUMANAGEPRINTS);
+                break;
+        }
     }
 
 }
