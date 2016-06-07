@@ -1,9 +1,9 @@
 <div mdl class="mdl-tabs mdl-js-tabs">
   <div class="mdl-tabs__tab-bar">
-    <a class="mdl-tabs__tab is-active" (click)="onClickTab('place')">Place</a>
-    <a class="mdl-tabs__tab" (click)="onClickTab('menu')">Menu</a>
-    <a class="mdl-tabs__tab" (click)="onClickTab('prints')">Prints</a>
+    <a class="mdl-tabs__tab is-active" (click)="onClickTab('place', manageplace)">Place</a>
+    <a class="mdl-tabs__tab" (click)="onClickTab('menu', managemenu)">Menu</a>
+    <a class="mdl-tabs__tab" (click)="onClickTab('prints', null)">Prints</a>
   </div>
-  <controller-manageplace [hidden]="!tabPlaceActive" [dbMenuItems]="dbMenuItems"></controller-manageplace>
-  <controller-managemenu [hidden]="!tabMenuActive" [dbPlace]="dbPlace"></controller-managemenu>
+  <controller-manageplace mdl #manageplace [hidden]="!tabPlaceActive"></controller-manageplace>
+  <controller-managemenu mdl #managemenu [hidden]="!tabMenuActive"></controller-managemenu>
 </div>
