@@ -1,14 +1,15 @@
 import {Component} from '@angular/core';
 import {HTTP_PROVIDERS} from '@angular/http';
 import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-deprecated';
-import {CORE_DIRECTIVES} from '@angular/common';
-import {FORM_DIRECTIVES} from '@angular/common';
+import {CORE_DIRECTIVES, FORM_DIRECTIVES} from '@angular/common';
 import {ControllerPlace} from '../../app/controller/place/ControllerPlace';
 import {ControllerHome} from '../../app/controller/home/ControllerHome';
 import {ControllerManagePlace} from '../../app/controller/account/ControllerManagePlace';
 import {ControllerManagePlaceDetail} from '../../app/controller/account/place/ControllerManagePlaceDetail';
 import {ControllerManageMenu} from '../../app/controller/account/place/ControllerManageMenu';
 import {ControllerManageUser} from '../../app/controller/account/ControllerManageUser';
+import {ServiceSessionData} from '../../app/service/servicesessiondata';
+import {ServiceToolbar} from '../../app/service/servicetoolbar';
 import {ServicePlace} from '../../app/service/serviceplace';
 import {ServiceMenuItem} from '../../app/service/servicemenuitem';
 import {ServiceSchedule} from '../../app/service/serviceschedule';
@@ -50,6 +51,8 @@ import {ServiceSchedule} from '../../app/service/serviceschedule';
         FORM_DIRECTIVES
     ],
     providers: [
+        ServiceSessionData,
+        ServiceToolbar,
         ServiceMenuItem,
         ServicePlace,
         ServiceSchedule,
@@ -58,6 +61,8 @@ import {ServiceSchedule} from '../../app/service/serviceschedule';
     ]
 })
 export class AppComponent {
-    
- }
+    constructor(
+        private _serviceToolbar: ServiceToolbar
+    ) { }
+}
 //
