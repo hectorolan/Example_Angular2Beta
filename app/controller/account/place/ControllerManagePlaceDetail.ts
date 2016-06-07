@@ -1,6 +1,6 @@
 //Library
-import {Component, OnInit} from '@angular/core';
-import {NgForm}    from '@angular/common';
+import {Component, OnInit, OnDestroy} from '@angular/core';
+import {NgForm} from '@angular/common';
 import {ControlGroup, Control, FormBuilder, AbstractControl, Validators} from '@angular/common';
 //Model
 import {Place} from '../../../model/place';
@@ -8,6 +8,7 @@ import {Schedule} from '../../../model/schedule';
 //Controller
 import {ControllerFieldValidation} from '../../../controller/pamsupport/ControllerFieldValidation';
 //Service
+import {ServiceToolbar, IActionBar} from '../../../service/servicetoolbar';
 import {ServicePlace} from '../../../service/serviceplace';
 import {ServiceSchedule} from '../../../service/serviceschedule';
 //Log
@@ -20,34 +21,30 @@ import {Log} from '../../../service/log';
         ControllerFieldValidation
     ]
 })
-export class ControllerManagePlaceDetail implements OnInit {
-    /*
-    * To make diferent:
-    * place.id == null ? then is new Place to create
-    * if not: Edit Place*/
-
+export class ControllerManagePlaceDetail implements OnInit, IActionBar {
+    
+    dbPlace: Place;
+    dbSchedule: Schedule;
+    errors = {
+        servicePlaceError: "",
+        serviceScheduleError: "",
+        errorSaving: ""
+    };
     formPlace: ControlGroup;
-    originalPlace: Place;
-    originalSchedule: Schedule;
-    errorSaving: string;
-    title: string;
-
+    
+    /* Constructor */
     constructor(
         private _formBuilder: FormBuilder,
+        private _serviceToolbar: ServiceToolbar,
         private _servicePlace: ServicePlace,
         private _serviceSchedule: ServiceSchedule
     ) {
     }
+    /* OnInit */
     ngOnInit() {
-        //TODO
-        /*
-        * Here the app will look for the logged user to check
-        * if a Place already exists, If not the user is creating the new
-        * place. For now this only is for add places news
-        */
-        this.title = "Create Place";
+        this._serviceToolbar.btnActions = this;
         this.ngOnInit_BuildForm();
-        this.ngOnInit_GetSavedPlace();
+        this.ngOnInit_LoadDBData();
     }
     ngOnInit_BuildForm() {
         this.formPlace = this._formBuilder.group({
@@ -77,24 +74,27 @@ export class ControllerManagePlaceDetail implements OnInit {
             sundayOpen: new Control(''),
             sundayClose: new Control('')
         });
-        console.log(this.formPlace);
+        Log.writeMessage("---Place Form Created")
+        Log.writeMessage(this.formPlace);
     }
-    ngOnInit_GetSavedPlace() {
-        this.originalPlace = new Place();
-        this.originalSchedule = new Schedule();
+    ngOnInit_LoadDBData() {
+        this.LoadPlace();
+        this.LoadSchedule();
     }
-    key(a:any){
-        var a = a;
-    }
-
-    /* Submit Form - Save */
-    onSubmitSaveChanges() {
-        this.save();
+    onClickMenuBtn(button: string){
+        switch (button) {
+            case ServiceToolbar.BTNSAVE:
+                this.save();
+                break;
+            default:
+                break;
+        }
     }
     /* Save */
     save() {
+        Log.writeMessage("---Save on Manage Account Place")
         //if id exists - update Place
-        if (this.originalPlace.id) {
+        if (this.dbPlace && this.dbPlace.id) {
             this.save_Update();
             return;
         }
@@ -119,35 +119,35 @@ export class ControllerManagePlaceDetail implements OnInit {
         let schedule: Schedule = this.scheduleFromControl();
         this._serviceSchedule.addSchedule(place.id, schedule)
             .subscribe(
-                schedule => this.save_ObservableSetSchedule('New', schedule),
-                error => this.save_ObservableSetError('errorNew', error)
+            schedule => this.save_ObservableSetSchedule('New', schedule),
+            error => this.save_ObservableSetError('errorNew', error)
             );
     }
     save_Update() {
         let place: Place = this.placeFromControl();
         let schedule: Schedule = this.scheduleFromControl();
-        if (Place.equal(place, this.originalPlace) && Schedule.equal(schedule, this.originalSchedule)) {
+        if (Place.equal(place, this.dbPlace) && Schedule.equal(schedule, this.dbSchedule)) {
             //Nothing Change - ..TODO Tell the user everything is untouched
             Log.writeMessage("Place has no changes from original");
-            if (Schedule.equal(schedule, this.originalSchedule)) {
+            if (Schedule.equal(schedule, this.dbSchedule)) {
                 Log.writeMessage("Schedule has no changes from original");
             }
             return;
         }
         //Save
-        if (!Place.equal(place, this.originalPlace)) {
+        if (!Place.equal(place, this.dbPlace)) {
             Log.writeMessage("Place has diferences");
-            place.id = this.originalPlace.id;
-            place.userId = this.originalPlace.userId;
+            place.id = this.dbPlace.id;
+            place.userId = this.dbPlace.userId;
             this._servicePlace.updatePlace(place).subscribe(
                 place => this.save_ObservableSetPlace('Update', place),
                 error => this.save_ObservableSetError('errorUpdate', error)
             );
         }
-        if (!Schedule.equal(schedule, this.originalSchedule)) {
+        if (!Schedule.equal(schedule, this.dbSchedule)) {
             Log.writeMessage("Schedule has diferences");
-            schedule.id = this.originalSchedule.id;
-            schedule.placeId = this.originalSchedule.placeId;
+            schedule.id = this.dbSchedule.id;
+            schedule.placeId = this.dbSchedule.placeId;
             this._serviceSchedule.updateSchedule(schedule).subscribe(
                 schedule => this.save_ObservableSetSchedule('Update', schedule),
                 error => this.save_ObservableSetError('errorUpdate', error)
@@ -156,18 +156,28 @@ export class ControllerManagePlaceDetail implements OnInit {
     }
     save_ObservableSetPlace(message: string, place: Place) {
         Log.writeMessage(place.name + ":" + message);
-        this.originalPlace = place;
+        this.dbPlace = place;
     }
     save_ObservableSetSchedule(message: string, schedule: Schedule) {
         Log.writeMessage(schedule.placeId + "id:" + message);
-        this.originalSchedule = schedule;
+        this.dbSchedule = schedule;
     }
     save_ObservableSetError(key: string, error: any) {
         Log.writeMessage(error);
-        this.errorSaving = <string>error;
+        this.errors.errorSaving = <string>error;
     }
     /* Save Helpers - End */
 
+    /* Get Place from database */
+    LoadPlace() {
+        this.dbPlace = new Place();
+        this.errors.servicePlaceError = "";
+    }
+    /* Get Schedule from database */
+    LoadSchedule() {
+        this.dbSchedule = new Schedule();
+        this.errors.serviceScheduleError = "";
+    }
     /* Get Place from control */
     placeFromControl(): Place {
         let place: Place = new Place();
