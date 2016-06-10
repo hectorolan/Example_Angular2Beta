@@ -38,6 +38,9 @@ export class ControllerManageMenu implements OnInit, IActionBar {
                 break;
         }
     }
+    btnClickAddNewItem(category: string){
+        Log.writeMessage("---Btn Add New Item Clicked");
+    }
     save(){
         Log.writeMessage("---Save in Manage Menu");
     }
@@ -47,8 +50,5 @@ export class ControllerManageMenu implements OnInit, IActionBar {
     }
     LoadMenuItem(){
         this.errors.serviceMenuItemError = "";
-    }
-    gotoPlace(){
-        this._router.navigate(['ManagePlace', {id: 1}]);
     }
 }

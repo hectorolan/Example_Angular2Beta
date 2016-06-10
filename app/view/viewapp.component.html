@@ -5,9 +5,10 @@
     <div class="mdl-layout__header-row">
       <div class="mdl-layout-spacer"></div>
       <!-- save -->
+      <i class="material-icons">save</i>
       <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" 
       [hidden]="!_serviceToolbar.btnSaveVisible" (click)="_serviceToolbar.btnActions.onClickMenuBtn('ButtonSave')">
-         <span><i class="material-icons">save</i>Save</span>
+         <span>Save</span>
       </button>
       <!-- search
       <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right">
@@ -26,7 +27,7 @@
     <nav class="mdl-navigation">
       <a class="mdl-navigation__link" [routerLink]="['Home']" href="">Home</a>
       <a class="mdl-navigation__link" [routerLink]="['ManageUser']" href="">Hector Olan</a>
-      <a class="mdl-navigation__link" [routerLink]="['ManagePlace']" href="">Manage El Restaurante</a>
+      <a class="mdl-navigation__link" [routerLink]="['ManagePlace']" href="">El Restaurante</a>
       <a class="mdl-navigation__link" href="">Add Place</a>
     </nav>
   </div>
