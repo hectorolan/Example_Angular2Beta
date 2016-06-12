@@ -8,6 +8,7 @@ import {Schedule} from '../../../model/schedule';
 //Controller
 import {ControllerFieldValidation} from '../../../controller/pamsupport/ControllerFieldValidation';
 //Service
+import {ServiceSessionData} from '../../../service/servicesessiondata';
 import {ServiceToolbar, IActionBar} from '../../../service/servicetoolbar';
 import {ServicePlace} from '../../../service/serviceplace';
 import {ServiceSchedule} from '../../../service/serviceschedule';
@@ -22,7 +23,7 @@ import {Log} from '../../../service/log';
     ]
 })
 export class ControllerManagePlaceDetail implements OnInit, IActionBar {
-    
+    SessionData: ServiceSessionData;
     dbPlace: Place;
     dbSchedule: Schedule;
     errors = {
@@ -36,9 +37,11 @@ export class ControllerManagePlaceDetail implements OnInit, IActionBar {
     constructor(
         private _formBuilder: FormBuilder,
         private _serviceToolbar: ServiceToolbar,
+        private _serviceSessionData: ServiceSessionData,
         private _servicePlace: ServicePlace,
         private _serviceSchedule: ServiceSchedule
     ) {
+        this.SessionData = ServiceSessionData;
     }
     /* OnInit */
     ngOnInit() {
@@ -171,7 +174,9 @@ export class ControllerManagePlaceDetail implements OnInit, IActionBar {
     /* Get Place from database */
     LoadPlace() {
         this.dbPlace = new Place();
+        this.dbPlace.name = "El Restaurante";
         this.errors.servicePlaceError = "";
+        this.SessionData.currentPage = this.dbPlace.name;
     }
     /* Get Schedule from database */
     LoadSchedule() {

@@ -8,12 +8,10 @@ import {Log} from '../../app/service/log';
 export class ServiceSessionData {
     //Main Controllers
     //Session Variables
-    user: User;
-    currentPage: string;
+    static user: User;
+    static currentPage: string;
 
     constructor() {
     }
-    setCurrentPage(component: string) {
-        this.currentPage = component;
-    }
+
 }

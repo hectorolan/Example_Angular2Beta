@@ -1,29 +1,53 @@
 <div mdl class="mdl-cell mdl-cell--12-col">
-    <div class="mdl-card mdl-shadow--2dp pam-manage-card">
+    <div class="mdl-card mdl-shadow--2dp pam-full-width">
         <div class="mdl-card__title">
-            <h2 class="mdl-card__title-text">El Restaurante</h2>
-        </div>
-        <div class="mdl-card__supporting-text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sagittis pellentesque lacus eleifend lacinia...
-        </div>
-        <div class="mdl-card__supporting-text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sagittis pellentesque lacus eleifend lacinia...
-        </div>
-        <div class="mdl-card__supporting-text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sagittis pellentesque lacus eleifend lacinia...
-        </div>
-        <div class="mdl-card__supporting-text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sagittis pellentesque lacus eleifend lacinia...
-        </div>
-        <div class="mdl-card__supporting-text">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris sagittis pellentesque lacus eleifend lacinia...
+            <label class="mdl-card__title-text" *ngIf="SessionData.currentPage">{{SessionData.currentPage}}</label>
         </div>
         <div class="mdl-card__menu">
             <i class="material-icons">add</i>
-            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" 
-            (click)="btnClickAddNewItem()">
+            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" (click)="btnClickAddNewItem()">
                 Add
             </button>
+        </div>
+        <!-- The Menu Items -->
+        <div *ngFor="let category of categories">
+            <div class="mdl-cell mdl-cell--12-col">
+                <h5 style="margin-top: 24px;margin-bottom: 8px;">{{category}}</h5>
+            </div>
+            <div class="mdl-grid">
+                <div class="pam-full-width" *ngFor="let item of menuItems">
+                    <div class="pam-full-width" *ngIf="(item.category == category)">
+                        <div class="mdl-cell mdl-cell--12-col pam-full-width" style="position: relative;min-height:64px;padding-right:84px;">
+                            <!-- Name, Cal-->
+                            <div *ngIf="item.name || item.calories">
+                                <span>{{item.name}}</span>
+                                <span>{{item.calories}}</span>
+                            </div>
+                            <!-- Remarks -->
+                            <div *ngIf="item.remark">
+                                <span>{{item.remark}}</span>
+                            </div>
+                            <!-- Ingredients -->
+                            <div *ngIf="item.content">
+                                <span>{{item.content}}</span>
+                            </div>
+                            <!-- Price -->
+                            <div style="position: absolute;right: 44px;top: 4px;" *ngIf="item.price">
+                                <span class="pam-full-width">{{item.price}}</span>
+                            </div>
+                            <!-- Actions -->
+                            <div style="position: absolute;right: 8px; bottom: 4px;">
+                                <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
+                                    <i class="material-icons">mode_edit</i>
+                                </button>
+                                <button class="mdl-button mdl-js-button mdl-button--icon mdl-button--colored">
+                                    <i class="material-icons">delete</i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

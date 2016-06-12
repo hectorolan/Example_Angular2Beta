@@ -28,14 +28,15 @@ export class ControllerManagePlace implements OnInit, OnDestroy {
         private _serviceToolbar: ServiceToolbar) {
     }
     ngOnInit() {
+        //init first open tab
         this.setActionBarMenu("place");
     }
     /* OnDestroy */
     ngOnDestroy() {
-        //Set menu to defaults
+        //Set Actionbar to defaults
         this._serviceToolbar.updateToolbar("");
     }
-    //Events
+    //Manage Tabs and Actionbar
     onClickTab(tab: string, iActionBar: IActionBar) {
         //Tabs init
         this.tabPlaceActive = false;
