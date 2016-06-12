@@ -3,12 +3,6 @@
         <div class="mdl-card__title">
             <label class="mdl-card__title-text" *ngIf="SessionData.currentPage">{{SessionData.currentPage}}</label>
         </div>
-        <div class="mdl-card__menu">
-            <i class="material-icons">add</i>
-            <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" (click)="btnClickAddNewItem()">
-                Add
-            </button>
-        </div>
         <!-- The Menu Items -->
         <div *ngFor="let category of categories">
             <div class="mdl-cell mdl-cell--12-col">

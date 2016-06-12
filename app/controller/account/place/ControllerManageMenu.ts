@@ -40,15 +40,12 @@ export class ControllerManageMenu implements OnInit, IActionBar {
     }
     onClickMenuBtn(button: string){
         switch (button) {
-            case ServiceToolbar.BTNSAVE:
+            case ServiceToolbar.BTNADD:
                 this.save();
                 break;
             default:
                 break;
         }
-    }
-    btnClickAddNewItem(category: string){
-        Log.writeMessage("---Btn Add New Item Clicked");
     }
     save(){
         Log.writeMessage("---Save in Manage Menu");

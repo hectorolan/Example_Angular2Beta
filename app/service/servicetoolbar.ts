@@ -9,8 +9,10 @@ export class ServiceToolbar {
     btnActions: IActionBar;
     //Buttons
     static BTNSAVE: string = "ButtonSave";
+    static BTNADD: string= "ButtonAdd";
     static BTNHOME: string = "ButtonHome";
     btnSaveVisible: boolean = false;
+    btnAddVisible: boolean = false;
     btnHomeVisible: boolean = false;
     //Menus
     static MENUMANAGEPLACE: string = "ControllerManagePlace";
@@ -25,6 +27,7 @@ export class ServiceToolbar {
         Log.writeMessage("---UpdateToolBar");
         //Hide All buttons
         this.btnHomeVisible = false;
+        this.btnAddVisible = false;
         this.btnSaveVisible = false;
         //Select the buttons to show
         switch (component) {
@@ -32,7 +35,7 @@ export class ServiceToolbar {
                 this.btnSaveVisible = true;
                 break;
             case ServiceToolbar.MENUMANAGEMENU:
-                this.btnSaveVisible = true;
+                this.btnAddVisible = true;
                 break;
             case ServiceToolbar.MENUMANAGEUSER:
                 this.btnSaveVisible = true;
