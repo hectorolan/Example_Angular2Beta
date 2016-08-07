@@ -2,7 +2,7 @@
   <div class="mdl-tabs__tab-bar">
     <a class="mdl-tabs__tab is-active" (click)="onClickTab('place', manageplace)">Place</a>
     <a class="mdl-tabs__tab" (click)="onClickTab('menu', managemenu)">Menu</a>
-    <a class="mdl-tabs__tab" (click)="onClickTab('prints', null)">Prints</a>
+    <!--<a class="mdl-tabs__tab" (click)="onClickTab('prints', )">Prints</a>-->
   </div>
   <controller-manageplace mdl #manageplace [hidden]="!tabPlaceActive"></controller-manageplace>
   <controller-managemenu mdl #managemenu [hidden]="!tabMenuActive"></controller-managemenu>
