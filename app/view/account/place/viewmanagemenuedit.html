@@ -1,0 +1,58 @@
+<form [ngFormModel]="formItem" (ngSubmit)="saveEditor()">
+    <!-- category -->
+    <div class="mdl-cell mdl-cell--12-col">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell--12-col">
+            <select class="mdl-textfield__input" ngControl="category" #category="ngForm">
+                                    <option>Mexican</option>
+                                    <option>Puerto Rican</option>
+                                    <option>American</option>
+                                    <option>Italian</option>
+                                    <option>Chinise</option>
+                                    <option>Perubian</option>
+                                    <option>Other</option>
+                                </select>
+            <label class="mdl-textfield__label" for="category">Category</label>
+        </div>
+        <controller-fieldvalidation [control]="formItem.controls['category']"></controller-fieldvalidation>
+    </div>
+    <!-- place name -->
+    <div class="mdl-cell mdl-cell--12-col">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell--12-col">
+            <input class="mdl-textfield__input" type="text" ngControl="name" #name="ngForm" (keypress)="key(name)">
+            <label class="mdl-textfield__label" for="name">Item</label>
+        </div>
+        <controller-fieldvalidation [control]="formItem.controls['name']"></controller-fieldvalidation>
+    </div>
+    <!-- price -->
+    <!-- calories -->
+    <div class="mdl-cell mdl-cell--12-col">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell--6-col mdl-cell--4-col-tablet">
+            <input class="mdl-textfield__input" type="text" ngControl="price" #price="ngForm">
+            <label class="mdl-textfield__label" for="price">Price</label>
+            <controller-fieldvalidation [control]="formItem.controls['price']"></controller-fieldvalidation>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell--6-col mdl-cell--4-col-tablet">
+            <input class="mdl-textfield__input" type="text" ngControl="calories" #calories="ngForm">
+            <label class="mdl-textfield__label" for="calories">Calories</label>
+        </div>
+        <controller-fieldvalidation [control]="formItem.controls['calories']"></controller-fieldvalidation>
+    </div>
+    <!-- content -->
+    <div class="mdl-cell mdl-cell--12-col">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell--12-col">
+            <input class="mdl-textfield__input" type="text" ngControl="content" #content="ngForm">
+            <label class="mdl-textfield__label" for="content">Content</label>
+        </div>
+        <controller-fieldvalidation [control]="formItem.controls['content']"></controller-fieldvalidation>
+    </div>
+    <!-- remark -->
+    <div class="mdl-cell mdl-cell--12-col">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell--12-col">
+            <input class="mdl-textfield__input" type="text" ngControl="remark" #remark="ngForm">
+            <label class="mdl-textfield__label" for="remark">Comments</label>
+        </div>
+    </div>
+
+    <button type="button" class="mdl-button">Save</button>
+    <button type="button" class="mdl-button close">Cancel</button>
+</form>
