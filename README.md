@@ -11,7 +11,7 @@ Download the repository and with npm and gulp on the repository:
 npm install
 npm start
 ```
-You should be good to go!... You will need to feed the services for the data with the olanh-pam-restful have a look.
+You should be good to go!... You will need to feed the services for the data with the [Java Restful Services](https://github.com/olavelek/olanh-pam-restful "olanh-pam-restful") have a look.
 
 ###Status: 
 in development
