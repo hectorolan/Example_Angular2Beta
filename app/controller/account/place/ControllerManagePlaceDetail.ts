@@ -1,3 +1,4 @@
+import {ControllerBase} from '../../../controller/pamsupport/ControllerBase';
 //Library
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {NgForm} from '@angular/common';
@@ -22,8 +23,7 @@ import {Log} from '../../../service/log';
         ControllerFieldValidation
     ]
 })
-export class ControllerManagePlaceDetail implements OnInit, IActionBar {
-    SessionData: ServiceSessionData;
+export class ControllerManagePlaceDetail extends ControllerBase {
     dbPlace: Place;
     dbSchedule: Schedule;
     errors = {
@@ -35,19 +35,20 @@ export class ControllerManagePlaceDetail implements OnInit, IActionBar {
     
     /* Constructor */
     constructor(
+        _serviceToolbar: ServiceToolbar,
+        _serviceSessionData: ServiceSessionData,
         private _formBuilder: FormBuilder,
-        private _serviceToolbar: ServiceToolbar,
-        private _serviceSessionData: ServiceSessionData,
         private _servicePlace: ServicePlace,
         private _serviceSchedule: ServiceSchedule
     ) {
-        this.SessionData = ServiceSessionData;
+        super(_serviceSessionData,_serviceToolbar);
     }
     /* OnInit */
     ngOnInit() {
-        this._serviceToolbar.btnActions = this;
+        super.ngOnInit();
         this.ngOnInit_BuildForm();
-        this.ngOnInit_LoadDBData();
+        this.LoadPlace();
+        this.LoadSchedule();
     }
     ngOnInit_BuildForm() {
         this.formPlace = this._formBuilder.group({
@@ -80,14 +81,12 @@ export class ControllerManagePlaceDetail implements OnInit, IActionBar {
         Log.writeMessage("---Place Form Created")
         Log.writeMessage(this.formPlace);
     }
-    ngOnInit_LoadDBData() {
-        this.LoadPlace();
-        this.LoadSchedule();
-    }
     onClickMenuBtn(button: string){
+        Log.writeMessage("---Click menu on Manage Account Place");
         switch (button) {
             case ServiceToolbar.BTNSAVE:
-                this.save();
+                alert("Click Save on PlaceDetail");
+                //this.save();
                 break;
             default:
                 break;
@@ -95,7 +94,7 @@ export class ControllerManagePlaceDetail implements OnInit, IActionBar {
     }
     /* Save */
     save() {
-        Log.writeMessage("---Save on Manage Account Place")
+        Log.writeMessage("---Save on Manage Account Place");
         //if id exists - update Place
         if (this.dbPlace && this.dbPlace.id) {
             this.save_Update();
@@ -104,6 +103,47 @@ export class ControllerManagePlaceDetail implements OnInit, IActionBar {
         //Creating new Place
         this.save_New();
     }
+    /* Get Place, Scheule from database */
+    LoadPlace() {
+        this.dbPlace = new Place();
+        this.dbPlace.name = "El Restaurante";
+        this.errors.servicePlaceError = "";
+        ServiceSessionData.currentPage = this.dbPlace.name;
+    }
+    LoadSchedule() {
+        this.dbSchedule = new Schedule();
+        this.errors.serviceScheduleError = "";
+    }
+    /* Get Place, Schedule from control */
+    placeFromControl(): Place {
+        let place: Place = new Place();
+        place.name = this.formPlace.controls['name'].value;
+        place.category = this.formPlace.controls['category'].value;
+        place.city = this.formPlace.controls['city'].value;
+        place.type = this.formPlace.controls['type'].value;
+        place.image = this.formPlace.controls['image'].value;
+        place.phoneNumber = this.formPlace.controls['phoneNumber'].value;
+        return place;
+    }
+    scheduleFromControl(): Schedule {
+        let schedule: Schedule = new Schedule();
+        schedule.sundayOpen = this.formPlace.controls['sundayOpen'].value;
+        schedule.sundayClose = this.formPlace.controls['sundayClose'].value;
+        schedule.mondayOpen = this.formPlace.controls['mondayOpen'].value;
+        schedule.mondayClose = this.formPlace.controls['mondayClose'].value;
+        schedule.tuesdayOpen = this.formPlace.controls['tuesdayOpen'].value;
+        schedule.tuesdayClose = this.formPlace.controls['tuesdayClose'].value;
+        schedule.wednesdayOpen = this.formPlace.controls['wednesdayOpen'].value;
+        schedule.wednesdayClose = this.formPlace.controls['wednesdayClose'].value;
+        schedule.thursdayOpen = this.formPlace.controls['thursdayOpen'].value;
+        schedule.thursdayClose = this.formPlace.controls['thursdayClose'].value;
+        schedule.fridayOpen = this.formPlace.controls['fridayOpen'].value;
+        schedule.fridayClose = this.formPlace.controls['fridayClose'].value;
+        schedule.saturdayOpen = this.formPlace.controls['saturdayOpen'].value;
+        schedule.saturdayClose = this.formPlace.controls['saturdayClose'].value;
+        return schedule;
+    }
+
     /* Save Helpers - Start */
     save_Confirm() {
         //..TODO Yes, No, Cancel (cancel stops the page from moveon)
@@ -170,48 +210,5 @@ export class ControllerManagePlaceDetail implements OnInit, IActionBar {
         this.errors.errorSaving = <string>error;
     }
     /* Save Helpers - End */
-
-    /* Get Place from database */
-    LoadPlace() {
-        this.dbPlace = new Place();
-        this.dbPlace.name = "El Restaurante";
-        this.errors.servicePlaceError = "";
-        this.SessionData.currentPage = this.dbPlace.name;
-    }
-    /* Get Schedule from database */
-    LoadSchedule() {
-        this.dbSchedule = new Schedule();
-        this.errors.serviceScheduleError = "";
-    }
-    /* Get Place from control */
-    placeFromControl(): Place {
-        let place: Place = new Place();
-        place.name = this.formPlace.controls['name'].value;
-        place.category = this.formPlace.controls['category'].value;
-        place.city = this.formPlace.controls['city'].value;
-        place.type = this.formPlace.controls['type'].value;
-        place.image = this.formPlace.controls['image'].value;
-        place.phoneNumber = this.formPlace.controls['phoneNumber'].value;
-        return place;
-    }
-    /* Get Schedule from control */
-    scheduleFromControl(): Schedule {
-        let schedule: Schedule = new Schedule();
-        schedule.sundayOpen = this.formPlace.controls['sundayOpen'].value;
-        schedule.sundayClose = this.formPlace.controls['sundayClose'].value;
-        schedule.mondayOpen = this.formPlace.controls['mondayOpen'].value;
-        schedule.mondayClose = this.formPlace.controls['mondayClose'].value;
-        schedule.tuesdayOpen = this.formPlace.controls['tuesdayOpen'].value;
-        schedule.tuesdayClose = this.formPlace.controls['tuesdayClose'].value;
-        schedule.wednesdayOpen = this.formPlace.controls['wednesdayOpen'].value;
-        schedule.wednesdayClose = this.formPlace.controls['wednesdayClose'].value;
-        schedule.thursdayOpen = this.formPlace.controls['thursdayOpen'].value;
-        schedule.thursdayClose = this.formPlace.controls['thursdayClose'].value;
-        schedule.fridayOpen = this.formPlace.controls['fridayOpen'].value;
-        schedule.fridayClose = this.formPlace.controls['fridayClose'].value;
-        schedule.saturdayOpen = this.formPlace.controls['saturdayOpen'].value;
-        schedule.saturdayClose = this.formPlace.controls['saturdayClose'].value;
-        return schedule;
-    }
 }
 
