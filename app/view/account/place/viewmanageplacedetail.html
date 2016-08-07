@@ -10,7 +10,7 @@
                     <!-- place name -->
                     <div class="mdl-cell mdl-cell--12-col">
                         <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-cell--12-col">
-                            <input class="mdl-textfield__input" type="text" ngControl="name" #name="ngForm" (keypress)="key(name)">
+                            <input class="mdl-textfield__input" type="text" ngControl="name" #name="ngForm">
                             <label class="mdl-textfield__label" for="name">Place Name</label>
                         </div>
                         <controller-fieldvalidation [control]="formPlace.controls['name']"></controller-fieldvalidation>
