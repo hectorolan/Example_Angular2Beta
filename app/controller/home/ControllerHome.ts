@@ -28,7 +28,6 @@ export class ControllerHome implements OnInit {
         private _servicePlace: ServicePlace) {
     }
     ngOnInit() {
-        let id = +this._routeParams.get('id');
         this.getPlaces();
     }
     /*
