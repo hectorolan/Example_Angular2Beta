@@ -9,6 +9,9 @@ import {ServiceToolbar, IActionBar} from '../../service/servicetoolbar';
 //Log
 import {Log} from '../../service/log';
 
+/** This component manage the Toolbar, and the action bar.
+ * The menu component has multiple actionbars, 
+ * ControllerManageMenu will managethe actionbar too. */
 @Component({
     selector: 'controller-manageplace',
     templateUrl: '../../../app/view/account/viewmanageplace.html',
@@ -22,19 +25,15 @@ export class ControllerManagePlace implements OnInit, OnDestroy {
     tabPlaceActive = true;
     tabMenuActive = false;
     tabPrintsActive = false;
+    manageplace: any;
 
     constructor(
         private _serviceSessionData: ServiceSessionData,
         private _serviceToolbar: ServiceToolbar) {
     }
     ngOnInit() {
-        //init first open tab
-        this.setActionBarMenu("place");
     }
-    /* OnDestroy */
     ngOnDestroy() {
-        //Set Actionbar to defaults
-        this._serviceToolbar.updateToolbar("");
     }
     //Manage Tabs and Actionbar
     onClickTab(tab: string, iActionBar: IActionBar) {
@@ -46,28 +45,15 @@ export class ControllerManagePlace implements OnInit, OnDestroy {
         //Update Menu
         switch (tab) {
             case "place":
-            this.tabPlaceActive = true;
+                this.tabPlaceActive = true;
+                iActionBar.setActionBar(ServiceToolbar.MENUMANAGEPLACE);
                 break;
             case "menu":
-            this.tabMenuActive = true;
+                this.tabMenuActive = true;
+                iActionBar.setActionBar(ServiceToolbar.MENUMANAGEMENUDETAIL);
                 break;
             case "prints":
             this.tabPrintsActive = true;
-                break;
-        }
-        this.setActionBarMenu(tab);
-        this._serviceToolbar.btnActions = iActionBar;
-    }
-    setActionBarMenu(tab: string) {
-        switch (tab) {
-            case "place":
-                this._serviceToolbar.updateToolbar(ServiceToolbar.MENUMANAGEPLACE);
-                break;
-            case "menu":
-                this._serviceToolbar.updateToolbar(ServiceToolbar.MENUMANAGEMENU);
-                break;
-            case "prints":
-                this._serviceToolbar.updateToolbar(ServiceToolbar.MENUMANAGEPRINTS);
                 break;
         }
     }
