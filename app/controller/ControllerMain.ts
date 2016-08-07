@@ -44,7 +44,7 @@ import {ServiceSchedule} from '../../app/service/serviceschedule';
 ])
 @Component({
     selector: 'pam',
-    templateUrl: 'app/view/viewapp.component.html',
+    templateUrl: 'app/view/viewmain.html',
     directives: [
         ROUTER_DIRECTIVES,
         CORE_DIRECTIVES,

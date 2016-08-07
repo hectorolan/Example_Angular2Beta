@@ -6,13 +6,13 @@
       <div class="mdl-layout-spacer"></div>
       <!-- save -->
       <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" 
-      [hidden]="!_serviceToolbar.btnSaveVisible" (click)="_serviceToolbar.btnActions.onClickMenuBtn('ButtonSave')">
+      [hidden]="!_serviceToolbar.btnSaveVisible" (click)="_serviceToolbar.onActionClicks.onClickMenuBtn('ButtonSave')">
          <span>Save</span>
          <i class="material-icons">save</i>
       </button>
       <!-- Add -->
       <button class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent" 
-      [hidden]="!_serviceToolbar.btnAddVisible" (click)="_serviceToolbar.btnActions.onClickMenuBtn('ButtonAdd')">
+      [hidden]="!_serviceToolbar.btnAddVisible" (click)="_serviceToolbar.onActionClicks.onClickMenuBtn('ButtonAdd')">
          <span>Add</span>
          <i class="material-icons">add</i>
       </button>
