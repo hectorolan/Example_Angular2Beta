@@ -6,46 +6,51 @@ import {ServiceSessionData} from '../../app/service/servicesessiondata';
 
 @Injectable()
 export class ServiceToolbar {
-    btnActions: IActionBar;
+    onActionClicks: IActionBar;
     //Buttons
     static BTNSAVE: string = "ButtonSave";
     static BTNADD: string= "ButtonAdd";
     static BTNHOME: string = "ButtonHome";
-    btnSaveVisible: boolean = false;
-    btnAddVisible: boolean = false;
-    btnHomeVisible: boolean = false;
+    private btnSaveVisible: boolean = false;
+    private btnAddVisible: boolean = false;
+    private btnHomeVisible: boolean = false;
     //Menus
-    static MENUMANAGEPLACE: string = "ControllerManagePlace";
-    static MENUMANAGEMENU: string = "ControllerManageMenu";
-    static MENUMANAGEPRINTS: string = "ControllerManagePrints"
-    static MENUMANAGEUSER: string = "ControllerManageUser";
+    static MENUHOME: string = "MenuHome";
+    static MENUMANAGEPLACE: string = "MenuManagePlace";
+    static MENUMANAGEMENUDETAIL: string = "MenuManageMenuDetail";
+    static MENUMANAGEMENUEDIT: string = "MenuManageMenuEdit";
+    static MENUMANAGEPRINTS: string = "MenuManagePrints"
+    static MENUMANAGEUSER: string = "MenuManageUser";
     //Constructor
     constructor() {
         
     }
-    updateToolbar(component: string) {
+    updateToolbar(menu: string) {
         Log.writeMessage("---UpdateToolBar");
         //Hide All buttons
         this.btnHomeVisible = false;
         this.btnAddVisible = false;
         this.btnSaveVisible = false;
         //Select the buttons to show
-        switch (component) {
+        switch (menu) {
             case ServiceToolbar.MENUMANAGEPLACE:
                 this.btnSaveVisible = true;
                 break;
-            case ServiceToolbar.MENUMANAGEMENU:
+            case ServiceToolbar.MENUMANAGEMENUDETAIL:
                 this.btnAddVisible = true;
                 break;
             case ServiceToolbar.MENUMANAGEUSER:
                 this.btnSaveVisible = true;
                 break;
+            case ServiceToolbar.MENUMANAGEMENUEDIT:
+                break;
             default:
-                this.btnActions = null;
+                this.onActionClicks = null;
                 break;
         }
     }
 }
 export interface IActionBar {
+    setActionBar(menu: string): void;
     onClickMenuBtn(button: string): void;
 }
