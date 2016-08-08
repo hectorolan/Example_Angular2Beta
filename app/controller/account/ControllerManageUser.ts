@@ -1,8 +1,12 @@
 //Library
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, OnDestroy} from '@angular/core';
 //Model
 import {Place} from '../../model/place';
 //Controller
+import {ControllerBase} from '../../controller/pamsupport/ControllerBase';
+//Service
+import {ServiceSessionData} from '../../service/servicesessiondata';
+import {ServiceToolbar} from '../../service/servicetoolbar';
 
 @Component({
     selector: 'controller-manageuser',
@@ -10,14 +14,13 @@ import {Place} from '../../model/place';
     directives: [
     ]
 })
-export class ControllerManageUser implements OnInit {
+export class ControllerManageUser extends ControllerBase {
     
-    constructor(
-        
-    ){
+    constructor(_serviceSessionData: ServiceSessionData, _serviceSessionToolbar: ServiceToolbar){
+        super(_serviceSessionData, _serviceSessionToolbar);
     }
-    ngOnInit(){
-        
+    onClickMenuBtn(button: string){
+
     }
 }
 
