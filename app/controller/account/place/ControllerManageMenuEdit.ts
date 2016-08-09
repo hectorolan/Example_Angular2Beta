@@ -43,11 +43,6 @@ export class ControllerManageMenuEdit extends ControllerBase {
         super.ngOnInit();
         this.LoadDBData();
         this.ngOnInit_BuildForm();
-        ServiceSessionData.controllerManageMenuEdit = this;
-    }
-    ngOnDestroy(){
-        super.ngOnDestroy();
-        ServiceSessionData.controllerManageMenuEdit = null;
     }
     ngOnInit_BuildForm() {
         this.formItem = this._formBuilder.group({
