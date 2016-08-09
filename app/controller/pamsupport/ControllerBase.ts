@@ -18,10 +18,9 @@ import {ControllerPlaceMenu} from '../../controller/place/ControllerPlaceMenu';
 import {ControllerPlaceSchedule} from '../../controller/place/ControllerPlaceSchedule';
 
 export abstract class ControllerBase implements OnInit, OnDestroy, IActionBar{
-    /* IActionBar Implementation */
-    //abstract ngOnInit(): void;
-    //abstract ngOnDestroy(): void;
+
     abstract onClickMenuBtn(button: string): void;
+    
     constructor(
         protected _serviceSessionData: ServiceSessionData,
         protected _serviceToolbar: ServiceToolbar) {
