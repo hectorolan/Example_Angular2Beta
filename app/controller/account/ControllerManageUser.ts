@@ -1,5 +1,5 @@
 //Library
-import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Component} from '@angular/core';
 //Model
 import {Place} from '../../model/place';
 //Controller
