@@ -1,7 +1,7 @@
 //Library
 import {Component, OnInit, OnDestroy} from '@angular/core';
 //Controller
-//import {ControllerBase} from '../../controller/pamsupport/ControllerBase';
+import {ControllerBase} from '../../controller/pamsupport/ControllerBase';
 import {ControllerManagePlaceDetail} from '../../controller/account/place/ControllerManagePlaceDetail';
 import {ControllerManageMenu} from '../../controller/account/place/ControllerManageMenu';
 //Service
@@ -21,7 +21,7 @@ import {Log} from '../../service/log';
         ControllerManageMenu
     ]
 })
-export class ControllerManagePlace {
+export class ControllerManagePlace extends ControllerBase {
     //Section Active
     tabPlaceActive = true;
     tabMenuActive = false;
@@ -29,9 +29,9 @@ export class ControllerManagePlace {
     manageplace: any;
 
     constructor(
-        private _serviceSessionData: ServiceSessionData,
-        private _serviceToolbar: ServiceToolbar) {
-        //super(_serviceSessionData, _serviceToolbar);
+        _serviceSessionData: ServiceSessionData,
+        _serviceToolbar: ServiceToolbar) {
+        super(_serviceSessionData, _serviceToolbar);
     }
     onClickMenuBtn(button: string){
 
