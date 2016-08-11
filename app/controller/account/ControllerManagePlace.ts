@@ -1,6 +1,7 @@
 //Library
 import {Component, OnInit, OnDestroy} from '@angular/core';
 //Controller
+//import {ControllerBase} from '../../controller/pamsupport/ControllerBase';
 import {ControllerManagePlaceDetail} from '../../controller/account/place/ControllerManagePlaceDetail';
 import {ControllerManageMenu} from '../../controller/account/place/ControllerManageMenu';
 //Service
@@ -20,7 +21,7 @@ import {Log} from '../../service/log';
         ControllerManageMenu
     ]
 })
-export class ControllerManagePlace implements OnInit, OnDestroy {
+export class ControllerManagePlace {
     //Section Active
     tabPlaceActive = true;
     tabMenuActive = false;
@@ -30,10 +31,10 @@ export class ControllerManagePlace implements OnInit, OnDestroy {
     constructor(
         private _serviceSessionData: ServiceSessionData,
         private _serviceToolbar: ServiceToolbar) {
+        //super(_serviceSessionData, _serviceToolbar);
     }
-    ngOnInit() {
-    }
-    ngOnDestroy() {
+    onClickMenuBtn(button: string){
+
     }
     //Manage Tabs and Actionbar
     onClickTab(tab: string, iActionBar: IActionBar) {

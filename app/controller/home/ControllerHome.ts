@@ -1,12 +1,15 @@
 //Library
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {Router, RouteParams} from '@angular/router-deprecated';
 import {Observable} from 'rxjs/Observable';
 //Model
 import {Place} from '../../model/Place';
 //Controller
+import {ControllerBase} from '../../controller/pamsupport/ControllerBase';
 import {ControllerHomePlaceDetail} from '../../controller/home/ControllerHomePlaceDetail';
 //Service
+import {ServiceSessionData} from '../../service/servicesessiondata';
+import {ServiceToolbar} from '../../service/servicetoolbar';
 import {ServicePlace} from '../../service/serviceplace'
 
 @Component({
@@ -16,19 +19,25 @@ import {ServicePlace} from '../../service/serviceplace'
         ControllerHomePlaceDetail
     ]
 })
-export class ControllerHome implements OnInit {
+export class ControllerHome extends ControllerBase {
     places: Place[] = [];
     error: string;
-    
     colorset: number = 0;
 
     constructor(
+        _serviceSessionData: ServiceSessionData, 
+        _serviceToolbar: ServiceToolbar,
         private _router: Router,
         private _routeParams: RouteParams,
         private _servicePlace: ServicePlace) {
+            super(_serviceSessionData, _serviceToolbar);
     }
     ngOnInit() {
+        super.ngOnInit();
         this.getPlaces();
+    }
+    onClickMenuBtn(button: string){
+        
     }
     /*
      * Get Places */

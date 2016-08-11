@@ -1,4 +1,3 @@
-import {ControllerBase} from '../../../controller/pamsupport/ControllerBase';
 //Library
 import {Component, OnInit, OnDestroy} from '@angular/core';
 import {NgForm} from '@angular/common';
@@ -7,6 +6,7 @@ import {ControlGroup, Control, FormBuilder, AbstractControl, Validators} from '@
 import {Place} from '../../../model/place';
 import {Schedule} from '../../../model/schedule';
 //Controller
+import {ControllerBase} from '../../../controller/pamsupport/ControllerBase';
 import {ControllerFieldValidation} from '../../../controller/pamsupport/ControllerFieldValidation';
 //Service
 import {ServiceSessionData} from '../../../service/servicesessiondata';
@@ -45,7 +45,7 @@ export class ControllerManagePlaceDetail extends ControllerBase {
     }
     /* OnInit */
     ngOnInit() {
-        super.ngOnInit();
+        //super.ngOnInit();
         this.ngOnInit_BuildForm();
         this.LoadPlace();
         this.LoadSchedule();
@@ -108,7 +108,6 @@ export class ControllerManagePlaceDetail extends ControllerBase {
         this.dbPlace = new Place();
         this.dbPlace.name = "El Restaurante";
         this.errors.servicePlaceError = "";
-        ServiceSessionData.currentPage = this.dbPlace.name;
     }
     LoadSchedule() {
         this.dbSchedule = new Schedule();
