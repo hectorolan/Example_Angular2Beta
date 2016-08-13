@@ -45,7 +45,8 @@ export class ControllerManagePlaceDetail extends ControllerBase {
     }
     /* OnInit */
     ngOnInit() {
-        //super.ngOnInit();
+        super.ngOnInit();
+        this.setActionBar(ServiceToolbar.MENUMANAGEPLACE);
         this.ngOnInit_BuildForm();
         this.LoadPlace();
         this.LoadSchedule();
