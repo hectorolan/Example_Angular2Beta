@@ -26,7 +26,7 @@ export class ServiceToolbar {
         
     }
     updateToolbar(menu: string) {
-        Log.writeMessage("---UpdateToolBar");
+        Log.writeMessage("---UpdateToolBar :" + menu);
         //Hide All buttons
         this.btnHomeVisible = false;
         this.btnAddVisible = false;
