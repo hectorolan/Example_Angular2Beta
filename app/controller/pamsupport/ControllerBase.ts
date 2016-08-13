@@ -28,7 +28,7 @@ export abstract class ControllerBase implements OnInit, OnDestroy, IActionBar{
     ngOnInit(){
     }
     ngOnDestroy(){
-        this._serviceToolbar.updateToolbar("clear");
+       this._serviceToolbar.updateToolbar("clear");
     }
     setActionBar(menu: string){ 
         this._serviceToolbar.onActionClicks = this;
