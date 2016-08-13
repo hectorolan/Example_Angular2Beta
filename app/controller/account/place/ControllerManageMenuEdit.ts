@@ -17,7 +17,7 @@ import {Log} from '../../../service/log';
 
 @Component({
     selector: 'controller-managemenu',
-    templateUrl: '../../../app/view/account/place/viewmanagemenu.html'
+    templateUrl: '../../../app/view/account/place/viewmanagemenuedit.html'
 })
 export class ControllerManageMenuEdit extends ControllerBase {
     //Database original objects
