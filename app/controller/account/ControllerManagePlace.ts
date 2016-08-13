@@ -54,7 +54,9 @@ export class ControllerManagePlace extends ControllerBase {
                 iActionBar.setActionBar(ServiceToolbar.MENUMANAGEMENUDETAIL);
                 break;
             case "prints":
-            this.tabPrintsActive = true;
+                this.tabPrintsActive = true;
+                break;
+            default:
                 break;
         }
     }
