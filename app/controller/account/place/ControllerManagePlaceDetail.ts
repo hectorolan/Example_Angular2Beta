@@ -1,5 +1,5 @@
 //Library
-import {Component, OnInit, OnDestroy} from '@angular/core';
+import {Component, OnInit, OnDestroy, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/common';
 import {ControlGroup, Control, FormBuilder, AbstractControl, Validators} from '@angular/common';
 //Model
@@ -8,6 +8,7 @@ import {Schedule} from '../../../model/schedule';
 //Controller
 import {ControllerBase} from '../../../controller/pamsupport/ControllerBase';
 import {ControllerFieldValidation} from '../../../controller/pamsupport/ControllerFieldValidation';
+import {ControllerDialogFeedback, IDialog} from '../../../controller/pamsupport/ControllerDialogFeedback';
 //Service
 import {ServiceSessionData} from '../../../service/servicesessiondata';
 import {ServiceToolbar, IActionBar} from '../../../service/servicetoolbar';
@@ -20,10 +21,12 @@ import {Log} from '../../../service/log';
     selector: 'controller-manageplace',
     templateUrl: '../../../app/view/account/place/viewmanageplacedetail.html',
     directives: [
-        ControllerFieldValidation
+        ControllerFieldValidation,
+        ControllerDialogFeedback
     ]
 })
-export class ControllerManagePlaceDetail extends ControllerBase {
+export class ControllerManagePlaceDetail extends ControllerBase implements IDialog {
+    @ViewChild('dialogconfirm') dialogConfirm: ControllerDialogFeedback;
     dbPlace: Place;
     dbSchedule: Schedule;
     errors = {
@@ -43,7 +46,7 @@ export class ControllerManagePlaceDetail extends ControllerBase {
     ) {
         super(_serviceSessionData,_serviceToolbar);
     }
-    /* OnInit */
+    /* OnInit */ 
     ngOnInit() {
         super.ngOnInit();
         this.setActionBar(ServiceToolbar.MENUMANAGEPLACE);
@@ -86,12 +89,18 @@ export class ControllerManagePlaceDetail extends ControllerBase {
         Log.writeMessage("---Click menu on Manage Account Place");
         switch (button) {
             case ServiceToolbar.BTNSAVE:
-                alert("Click Save on PlaceDetail");
-                //this.save();
+                //alert("Click Save on PlaceDetail");
+                if (this.dialogConfirm != null){
+                    this.dialogConfirm.setConfiguration("Save this", ControllerDialogFeedback.CFGYESNO);
+                    this.dialogConfirm.mainController = this;
+                }
                 break;
             default:
                 break;
         }
+    }
+    onDialogResponse(message: string, response: string){
+        alert(message + " : " + response);
     }
     /* Save */
     save() {

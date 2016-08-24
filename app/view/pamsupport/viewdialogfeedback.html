@@ -1,0 +1,12 @@
+<dialog mdl #dialog class="mdl-dialog">
+    <h4 class="mdl-dialog__title">Verify</h4>
+    <div class="mdl-dialog__content">
+        <p>{{message}}</p>
+    </div> 
+    <div class="mdl-dialog__actions">
+        <button type="button" class="mdl-button" (click)="onUserResponse('ButtonYes')">Yes</button>
+        <button type="button" class="mdl-button" (click)="onUserResponse('ButtonNo')">No</button>
+        <button type="button" class="mdl-button" (click)="onUserResponse('ButtonOk')">OK</button>
+        <button type="button" class="mdl-button" (click)="onUserResponse('ButtonCancel')">Cancel</button>
+    </div>
+</dialog>
