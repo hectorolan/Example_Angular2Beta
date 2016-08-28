@@ -39,9 +39,7 @@ export class ControllerManageMenuDetail extends ControllerBase{
     ngOnInit() {
         super.ngOnInit();
         this.LoadDBData();
-    }
-    ngOnDestroy(){
-        super.ngOnDestroy();
+        Log.writeMessage("--- Manage Menu Detail OnInitCompleted")
     }
     onClickMenuBtn(button: string) {
         switch (button) {
@@ -52,6 +50,7 @@ export class ControllerManageMenuDetail extends ControllerBase{
                 break;
         }
     }
+
     //Load Data from services
     LoadDBData() {
         this.LoadMenuItem();

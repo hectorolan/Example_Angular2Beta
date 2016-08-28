@@ -1,6 +1,5 @@
 //Library
 import {Component, OnInit, OnDestroy} from '@angular/core';
-import {Router} from '@angular/router-deprecated';
 import {NgForm} from '@angular/common';
 import {ControlGroup, Control, FormBuilder, AbstractControl, Validators} from '@angular/common';
 //Controller
@@ -29,12 +28,12 @@ export class ControllerManageMenuEdit extends ControllerBase {
     categories: string[] = [];
     menuItems: MenuItem[] = [];
     formItem: ControlGroup;
+    saveMessage: string = "Are you sure you wants to save?";
 
     constructor(
         _serviceToolbar: ServiceToolbar,
         _serviceSessionData: ServiceSessionData,
         private _formBuilder: FormBuilder,
-        private _router: Router,
         private _serviceMenuItem: ServiceMenuItem
     ) {
         super(_serviceSessionData, _serviceToolbar);
@@ -43,6 +42,7 @@ export class ControllerManageMenuEdit extends ControllerBase {
         super.ngOnInit();
         this.LoadDBData();
         this.ngOnInit_BuildForm();
+        Log.writeMessage("--- Manage Menu Edit OnInitCompleted")
     }
     ngOnInit_BuildForm() {
         this.formItem = this._formBuilder.group({
@@ -58,8 +58,6 @@ export class ControllerManageMenuEdit extends ControllerBase {
             remark: new Control(''),
             calories: new Control('')
         });
-        Log.writeMessage("---Item Form Created")
-        Log.writeMessage(this.formItem);
     }
     onClickMenuBtn(button: string) {
         switch (button) {
@@ -69,6 +67,8 @@ export class ControllerManageMenuEdit extends ControllerBase {
                 break;
         }
     }
+
+
     saveEditor() {
 
     }

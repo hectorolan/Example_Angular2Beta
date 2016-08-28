@@ -32,11 +32,6 @@ import {ServiceSchedule} from '../../app/service/serviceschedule';
         component: ControllerManagePlace
     },
     {
-        path: '/account/place/menu',
-        name: 'SetMenu',
-        component: ControllerManageMenu
-    },
-    {
         path: '/account',
         name: "ManageUser",
         component: ControllerManageUser

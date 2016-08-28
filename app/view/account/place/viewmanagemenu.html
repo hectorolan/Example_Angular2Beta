@@ -1,2 +1,2 @@
-<controller-managemenudetail mdl #managemenudetail [hidden]="!menuDetailVisible"></controller-managemenudetail>
-<controller-managemenuedit mdl #managemenuedit [hidden]="!menuDetailVisible"></controller-managemenuedit>
+<controller-managemenudetail mdl #managemenudetail *ngIf="menuDetailVisible"></controller-managemenudetail>
+<controller-managemenuedit mdl #managemenuedit *ngIf="!menuDetailVisible"></controller-managemenuedit>
