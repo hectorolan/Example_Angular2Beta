@@ -1,12 +1,12 @@
 <dialog mdl #dialog class="mdl-dialog">
-    <h4 class="mdl-dialog__title">Verify</h4>
+    <!--<h4 class="mdl-dialog__title">Verify</h4>-->
     <div class="mdl-dialog__content">
-        <p>{{message}}</p>
+        <h5>{{message}}</h5>
     </div> 
     <div class="mdl-dialog__actions">
-        <button type="button" class="mdl-button" (click)="onUserResponse('ButtonYes')">Yes</button>
-        <button type="button" class="mdl-button" (click)="onUserResponse('ButtonNo')">No</button>
-        <button type="button" class="mdl-button" (click)="onUserResponse('ButtonOk')">OK</button>
-        <button type="button" class="mdl-button" (click)="onUserResponse('ButtonCancel')">Cancel</button>
+        <button type="button" class="mdl-button" *ngIf="btnCancelVisible" (click)="onUserResponse('Cancel')">Cancel</button>
+        <button type="button" class="mdl-button" *ngIf="btnOkVisible" (click)="onUserResponse('Ok')">OK</button>
+        <button type="button" class="mdl-button" *ngIf="btnNoVisible" (click)="onUserResponse('No')">No</button>
+        <button type="button" class="mdl-button" *ngIf="btnYesVisible" (click)="onUserResponse('Yes')">Yes</button>
     </div>
 </dialog>

@@ -9,23 +9,23 @@ import {ControllerBase} from './ControllerBase';
     templateUrl: '../../app/view/pamsupport/viewdialogfeedback.html'
 })
 export class ControllerDialogFeedback  implements OnInit {
-    @Input() mainController: IDialog;
     @ViewChild('dialog') dialog: ElementRef;
+    mainController: IDialog;
     message: string;
     config: string;
-    visible: boolean = false;
 
     //Buttons
-    static BTNOK: string = "ButtonOk";
-    static BTNCANCEL: string= "ButtonCancel";
-    static BTNYES: string = "ButtonYes";
-    static BTNNO: string = "ButtonNo";
+    static BTNOK: string = "Ok";
+    static BTNCANCEL: string= "Cancel";
+    static BTNYES: string = "Yes";
+    static BTNNO: string = "No";
     private btnOkVisible: boolean = false;
     private btnCancelVisible: boolean = false;
     private btnYesVisible: boolean = false;
     private btnNoVisible: boolean = false;
     //Config
     static CFGYESNO: string = "YesNoButtons";
+    static CFGYESCANCEL: string = "YesCancelButtons";
     static CFGOK: string = "OkButton";
     static CFGCANCEL: string = "CancelButton";
     static CFGOKCANCEL: string = "OkCancelButtons";
@@ -37,6 +37,11 @@ export class ControllerDialogFeedback  implements OnInit {
     setConfiguration(message: string, config: string){
         this.message = message;
         this.config = config;
+        //init
+        this.btnYesVisible = false;
+        this.btnNoVisible = false;
+        this.btnOkVisible = false;
+        this.btnCancelVisible = false;
         //Set Button Configuration
         switch (this.config){
             case ControllerDialogFeedback.CFGYESNO:
@@ -46,6 +51,10 @@ export class ControllerDialogFeedback  implements OnInit {
             case ControllerDialogFeedback.CFGOKCANCEL:
                 this.btnOkVisible = true;
                 this.btnNoVisible = true;
+                break;
+            case ControllerDialogFeedback.CFGYESCANCEL:
+                this.btnYesVisible = true;
+                this.btnCancelVisible = true;
                 break;
             case ControllerDialogFeedback.CFGCANCEL:
                 this.btnCancelVisible = true;

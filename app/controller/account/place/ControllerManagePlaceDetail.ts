@@ -35,6 +35,7 @@ export class ControllerManagePlaceDetail extends ControllerBase implements IDial
         errorSaving: ""
     };
     formPlace: ControlGroup;
+    saveMessage: string = "Are you sure you wants to save?";
     
     /* Constructor */
     constructor(
@@ -53,7 +54,35 @@ export class ControllerManagePlaceDetail extends ControllerBase implements IDial
         this.ngOnInit_BuildForm();
         this.LoadPlace();
         this.LoadSchedule();
+        Log.writeMessage("--- Manage Place Detail OnInitCompleted")
     }
+    /* Action Bar Actions */
+    onClickMenuBtn(button: string){
+        Log.writeMessage("---Click menu on Manage Account Place");
+        switch (button) {
+            case ServiceToolbar.BTNSAVE:
+                this.dialogConfirm.setConfiguration(this.saveMessage, ControllerDialogFeedback.CFGYESCANCEL);
+                this.dialogConfirm.mainController = this;
+                break;
+            default:
+                break;
+        }
+    }
+    /* Dialog Feedback */
+    onDialogResponse(message: string, response: string){
+        switch (message){
+            case this.saveMessage:
+                if(response == ControllerDialogFeedback.BTNYES){
+                    //SAVE TODO
+                } else {
+                    alert("User Cancelled");
+                }
+            break;
+        }
+    }
+
+
+
     ngOnInit_BuildForm() {
         this.formPlace = this._formBuilder.group({
             name: new Control('', Validators.compose([
@@ -62,7 +91,7 @@ export class ControllerManagePlaceDetail extends ControllerBase implements IDial
                 Validators.minLength(3),
             ])),
             city: new Control('', Validators.required),
-            //validate file.
+            //TODO validate file.
             image: new Control(''),
             category: new Control('', Validators.required),
             type: new Control('', Validators.required),
@@ -82,25 +111,6 @@ export class ControllerManagePlaceDetail extends ControllerBase implements IDial
             sundayOpen: new Control(''),
             sundayClose: new Control('')
         });
-        Log.writeMessage("---Place Form Created")
-        Log.writeMessage(this.formPlace);
-    }
-    onClickMenuBtn(button: string){
-        Log.writeMessage("---Click menu on Manage Account Place");
-        switch (button) {
-            case ServiceToolbar.BTNSAVE:
-                //alert("Click Save on PlaceDetail");
-                if (this.dialogConfirm != null){
-                    this.dialogConfirm.setConfiguration("Save this", ControllerDialogFeedback.CFGYESNO);
-                    this.dialogConfirm.mainController = this;
-                }
-                break;
-            default:
-                break;
-        }
-    }
-    onDialogResponse(message: string, response: string){
-        alert(message + " : " + response);
     }
     /* Save */
     save() {
